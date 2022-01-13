@@ -5,6 +5,9 @@
 #include <set>
 #include <stack>
 #include <queue>
+#include <tuple>
+#include <numeric>
+#include <algorithm>
 
 using namespace std;
 
@@ -45,24 +48,30 @@ public:
         vector<int> left(10);  // 定义大小为 10 的vector
         vector<int> right(10, 20);  // 定义大小为 10 的vector，初始值为20
 
-        vector<int> vec = {2, 4, 5, 1, 3, 6};
+        vector<int> num = {2, 4, 5, 1, 3, 6};
 
         // 将 vector 从小到大排序
-        sort(vec.begin(), vec.end());
+        sort(num.begin(), num.end());
+
+        accumulate(num.begin(), num.end(), 0);  // 统计 vector 中 0 的个数
 
         // 将 vector 从大到小排序
-        // 方法一，直接排序
-        sort(vec.begin(), vec.end(), [](int a, int b) {
-            return b > a;  // c++中比较函数，不可用 a - b 小到大；得用 a > b 小到大
-        });
+        sort(num.begin(), num.end(), [](int a, int b) { return a > b; });
 
         // 方法二，从小到大排序后 reverse
-        sort(vec.begin(), vec.end());
-        reverse(vec.begin(), vec.end());
+        sort(num.begin(), num.end());
+        reverse(num.begin(), num.end());
 
-        int n = vec.size();
+        int n = num.size();
+
         for (int i = 0; i < n; i++) {
-            cout << vec[i] << endl;
+            cout << num[i] << endl;
+        }
+
+        for (int u: num) {
+        }
+
+        for (auto u: num) {  // 另一种遍历方法
         }
     }
 
@@ -106,34 +115,34 @@ public:
 
     void setTest() {
         int arr[5] = {0, 1, 2, 3, 4};
-        set<int> iset(arr, arr + 5);  // 由数组初始化 set
+        set<int> iSet(arr, arr + 5);  // 由数组初始化 set
 
         set<int> emptySet;  // 定义空 set
-        iset.insert(3);
-        iset.insert(3);
-        iset.insert(5);  // 添加元素
-        cout << "size:" << iset.size() << endl;
-        cout << "3 count = " << iset.count(3) << endl;  // set.count(x) 只能返回0或1；可用来判断元素是否存在过
+        iSet.insert(3);
+        iSet.insert(3);
+        iSet.insert(5);  // 添加元素
+        cout << "size:" << iSet.size() << endl;
+        cout << "3 count = " << iSet.count(3) << endl;  // set.count(x) 只能返回0或1；可用来判断元素是否存在过
 
-        iset.erase(1);  // 删除元素
+        iSet.erase(1);  // 删除元素
 
         // 遍历
-        set<int>::iterator it1 = iset.begin();
-        set<int>::iterator it2 = iset.end();
+        set<int>::iterator it1 = iSet.begin();
+        set<int>::iterator it2 = iSet.end();
         for (; it1 != it2; it1++) {  // 遍历；所有元素都会根据元素的键值自动排序
             cout << *it1;
         }
         cout << endl;
 
-        it1 = iset.find(3);
-        if (it1 != iset.end())  // set 中是否存在元素
+        it1 = iSet.find(3);
+        if (it1 != iSet.end())  // set 中是否存在元素
             cout << "3 found" << endl;
 
-        it1 = iset.find(1);
-        if (it1 != iset.end())
+        it1 = iSet.find(1);
+        if (it1 != iSet.end())
             cout << "1 not found" << endl;
 
-        iset.clear();
+        iSet.clear();
     }
 
     void stackTest() {
