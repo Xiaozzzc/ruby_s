@@ -14,10 +14,23 @@ using namespace std;
 class Learning {
 public:
 
+    /*
+     * vector -> push_back(), find()
+     * set -> insert(), erase(), find()
+     * map -> insert(pair<int, string>()), find()
+     * stack -> push(), pop(), top(), empty()
+     * queue -> push(), pop(), front(), back(), empty()
+     */
     void stringTest() {
         string s = "abc";
         string s1 = "hello";
         string s2 = "hello world";
+        string s3;  // ""
+        char c;  // \0
+        char c1 = 'a';
+        s += s1 + s2;
+        s3 += c1;
+
         // 比较，小于 0 表示s1小；等于 0 表示相等
         int cmp = s1.compare(s2);
 
@@ -42,28 +55,45 @@ public:
 
         // 反转
         reverse(s.begin(), s.end());
+
+        // startWith
+        if (s1.find(s2) == 0) {
+        }
+
+        // endWith
+        if (s1.find(s2) == s1.size() - s2.size()) {
+        }
     }
 
     void vecTest() {
         vector<int> left(10);  // 定义大小为 10 的vector
         vector<int> right(10, 20);  // 定义大小为 10 的vector，初始值为20
 
+        iota(left.begin(), left.end(), 10);  // 10, 11, 12 ...
+        int k = accumulate(left.begin(), left.end(), 0);  // 统计left中 0 的个数 ？？没用？？
+
+        left[100] = 100;
+        for (vector<int>::iterator it = left.begin(); it != left.end(); it++) {
+            cout << *it << endl;
+        }
+
+        int rightSize = right.size();
+        right.push_back(10);
+        int newRightSize = right.size();
+
         vector<int> num = {2, 4, 5, 1, 3, 6};
+        int t0 = num[100];  // t0 = 0, 不会报错
+        num[100] = 250;  // 不会报错
+        int t1 = num[100];  // t1 = 250
+        int t2 = num.size();  // t2 = 6
 
         // 将 vector 从小到大排序
         sort(num.begin(), num.end());
 
-        accumulate(num.begin(), num.end(), 0);  // 统计 vector 中 0 的个数
-
         // 将 vector 从大到小排序
         sort(num.begin(), num.end(), [](int a, int b) { return a > b; });
 
-        // 方法二，从小到大排序后 reverse
-        sort(num.begin(), num.end());
-        reverse(num.begin(), num.end());
-
         int n = num.size();
-
         for (int i = 0; i < n; i++) {
             cout << num[i] << endl;
         }
@@ -83,6 +113,11 @@ public:
         mp[4] = "5";
         mp.insert(pair<int, string>(5, "6"));  // 这样插入元素
 
+        string tmp = mp[100];  // 不回报错，会为""
+
+        cout << "size:" << mp.size() << endl;
+
+        // map本身就是按key排序，自有序
         // 通过map对象的方法获取的 iterator 数据类型是一个 std::pair 对象
         // 包括两个数据 iterator -> first和 iterator -> second 分别代表 关键字 和 存储的数据
         map<int, string>::iterator iter1 = mp.lower_bound(1);  // 1, "2"
