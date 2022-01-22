@@ -39,8 +39,8 @@ int main() {
     ListNode* node1 = new ListNode(2, node2);
     ListNode* node0 = new ListNode(5, node1);
 
-    learning.vecTest();
-    //solution.minSwaps(dist);
+    // learning.vecTest();
+    // solution.minSwaps(dist);
 
     return 0;
 }

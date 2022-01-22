@@ -70,7 +70,8 @@ public:
         vector<int> right(10, 20);  // 定义大小为 10 的vector，初始值为20
 
         iota(left.begin(), left.end(), 10);  // 10, 11, 12 ...
-        int k = accumulate(left.begin(), left.end(), 0);  // 统计left中 0 的个数 ？？没用？？
+        int sum = accumulate(left.begin(), left.end(), 0);  // 将left中的元素累加，累加初始值为 0
+        cout << sum << endl;
 
         left[100] = 100;
         for (vector<int>::iterator it = left.begin(); it != left.end(); it++) {
