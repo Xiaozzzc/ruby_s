@@ -53,7 +53,7 @@ int main() {
     std::cout << " elements." << '\n';
 
     Solution solution;
-    Learning learning;
+    Learning learning;  // 通过直接声明的方式即可创建对象
     BinarySearch binarySearch;
     vector<int> dist = {2, 5};
     vector<int> speed = {1, 1};
@@ -77,10 +77,6 @@ int main() {
         return vt[a[0]][a[1]] < vt[b[0]][b[1]];
     });
 
-    luoTest();
-    luoTest();
-    luoTest();
-    // learning.luoTest();
     // solution.highestRankedKItems(matrix, dist, speed, 2);
 
     return 0;

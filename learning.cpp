@@ -83,6 +83,7 @@ public:
         right.push_back(10);
         int newRightSize = right.size();
 
+        vector<int> u{1,2,3,4,5};
         vector<int> num = {2, 4, 5, 1, 3, 6};
         int t0 = num[100];  // t0 = 0, 不会报错
         num[100] = 250;  // 不会报错
