@@ -9,42 +9,16 @@
 #include <numeric>
 #include <algorithm>
 #include "solution.cpp"
-#include "learning.cpp"
+#include "learning/nameSpace.cpp"
+#include "learning/learning.cpp"
 #include "binarySearch.cpp"
 #include "linkedLst.cpp"
 
 using namespace std;
 
-namespace ruby {
-    namespace luo {
-
-        void luoFunc() {
-            static int i = 10;
-            i++;
-            cout << i << endl;
-        }
-    }
-}
-
-namespace ruby {
-    namespace luo {
-        void testFun2() {
-
-        }
-    }
-}
-
-void luoTest() {
-    using namespace ruby::luo;
-    luoFunc();
-    ruby::luo::luoFunc();
-    ruby::luo::luoFunc();
-    ruby::luo::luoFunc();
-    ruby::luo::luoFunc();
-    ruby::luo::testFun2();
-}
 
 int main() {
+    ruby::luo::luoFunc();
     tuple<int, char, double> mytuple(10, 'a', 3.14);
     pair<int, string> p(0, "sss");
     pair<int, string> p1 = make_pair(9, "9");
@@ -54,6 +28,7 @@ int main() {
 
     Solution solution;
     Learning learning;  // 通过直接声明的方式即可创建对象
+    learning.vecTest();
     BinarySearch binarySearch;
     vector<int> dist = {2, 5};
     vector<int> speed = {1, 1};
@@ -67,6 +42,11 @@ int main() {
     ListNode* node2 = new ListNode(6, node3);
     ListNode* node1 = new ListNode(2, node2);
     ListNode* node0 = new ListNode(5, node1);
+
+#define CREATE_FOR_TYPE(TYPE)
+    CREATE_FOR_TYPE(UInt8)
+    CREATE_FOR_TYPE(UInt16)
+#undef CREATE_FOR_TYPE
 
     vector<vector<int>> u = {{0, 1},
                              {0, 0}};
