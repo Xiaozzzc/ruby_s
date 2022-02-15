@@ -85,6 +85,8 @@ public:
 
         vector<int> u{1,2,3,4,5};
         vector<int> num = {2, 4, 5, 1, 3, 6};
+        num.insert(num.end(), 5, 4);  // 在 num 的最后面添加 5 个 4
+
         int t0 = num[100];  // t0 = 0, 不会报错
         num[100] = 250;  // 不会报错
         int t1 = num[100];  // t1 = 250
