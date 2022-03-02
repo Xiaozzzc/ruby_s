@@ -30,13 +30,6 @@ int main() {
     Learning learning;  // 通过直接声明的方式即可创建对象
     learning.vecTest();
     BinarySearch binarySearch;
-    vector<int> dist = {2, 5};
-    vector<int> speed = {1, 1};
-    vector<vector<int>> matrix = {{1, 0, 1},
-                                  {3, 5, 2},
-                                  {1, 0, 1}};
-    vector<string> start = {"ant", "act", "tack"};
-    vector<string> target = {"tack", "act", "acti"};
 
     ListNode* node3 = new ListNode(3, nullptr);
     ListNode* node2 = new ListNode(6, node3);
@@ -57,7 +50,14 @@ int main() {
         return vt[a[0]][a[1]] < vt[b[0]][b[1]];
     });
 
-    // solution.highestRankedKItems(matrix, dist, speed, 2);
 
+    vector<int> dist = {88690,69213};
+    vector<int> speed = {1, 1};
+    vector<vector<int>> matrix = {{1, 0, 1},
+                                  {3, 5, 2},
+                                  {1, 0, 1}};
+    vector<string> start = {"ant", "act", "tack"};
+    vector<string> target = {"tack", "act", "acti"};
+    solution.minimumTime(dist, 90165);
     return 0;
 }
