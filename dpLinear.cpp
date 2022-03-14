@@ -28,6 +28,7 @@ public:
      * 总耗时 = 2 + 6 + 5 + 2 + 6 = 21 秒
      */
     int minimumFinishTime(vector<vector<int>> &tires, int changeTime, int numLaps) {
+        // 2 ^ 17 = 131072 大于 changeTime 的取值范围 10 ^ 5。故选择 17
         // 初始化一个大小为 18 的数组，初始值为 INT_MAX / 2
         // 除二是防止下面计算状态转移时溢出
         // minSec[x] 表示 完成 x 轮，不换轮胎 所需要的最少时间
