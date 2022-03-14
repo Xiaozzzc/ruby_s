@@ -53,11 +53,11 @@ int main() {
 
     vector<int> dist = {88690,69213};
     vector<int> speed = {1, 1};
-    vector<vector<int>> matrix = {{1, 0, 1},
-                                  {3, 5, 2},
-                                  {1, 0, 1}};
+    vector<vector<int>> matrix = {{1,10},
+                                  {2,2},
+                                  {3,4}};
     vector<string> start = {"ant", "act", "tack"};
     vector<string> target = {"tack", "act", "acti"};
-    solution.minimumTime(dist, 90165);
+    solution.minimumFinishTime(matrix, 6, 5);
     return 0;
 }
