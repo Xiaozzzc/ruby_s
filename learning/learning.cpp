@@ -67,14 +67,16 @@ public:
     }
 
     void vecTest() {
-        vector<int> left(10);  // 定义大小为 10 的vector
-        vector<int> right(10, 20);  // 定义大小为 10 的vector，初始值为20
+        vector<int> init;
+        // init[10] = 9;  会报错，因为根本没有分配空间
+        vector<int> left(10);  // 定义大小为 10 的vector，初始值为 0
+        vector<int> right(10, 20);  // 定义大小为 10 的vector，初始值为 20
 
         iota(left.begin(), left.end(), 10);  // 10, 11, 12 ...
         int sum = accumulate(left.begin(), left.end(), 0);  // 将left中的元素累加，累加初始值为 0
         cout << sum << endl;
 
-        left[100] = 100;
+        left[100] = 100;  // 不会报错，见下面 num[100] = 250
         for (vector<int>::iterator it = left.begin(); it != left.end(); it++) {
             cout << *it << endl;
         }
@@ -83,14 +85,15 @@ public:
         right.push_back(10);
         int newRightSize = right.size();
 
-        vector<int> u{1,2,3,4,5};
+        vector<int> u{1, 2, 3, 4, 5};
         vector<int> num = {2, 4, 5, 1, 3, 6};
         num.insert(num.end(), 5, 4);  // 在 num 的最后面添加 5 个 4
 
         int t0 = num[100];  // t0 = 0, 不会报错
         num[100] = 250;  // 不会报错
+        int q = num[100];  // 250
         int t1 = num[100];  // t1 = 250
-        int t2 = num.size();  // t2 = 6
+        int t2 = num.size();  // t2 = 11
 
         // 将 vector 从小到大排序
         sort(num.begin(), num.end());
@@ -103,10 +106,21 @@ public:
             cout << num[i] << endl;
         }
 
-        for (int u: num) {
+        for (int x: num) {
+            cout << x << endl;
         }
 
-        for (auto u: num) {  // 另一种遍历方法
+        // 二维 vector
+        vector<vector<int>> graph;
+        vector<int> a = {1, 2, 3, 4};
+        vector<int> b = {5, 6, 7};
+
+        // 直接构建二维 vector
+        graph = {a, b};
+        for (auto &x: graph) {
+            for (auto q: x) {
+                cout << q << endl;
+            }
         }
     }
 
@@ -117,8 +131,15 @@ public:
         mp[3] = "4";
         mp[4] = "5";
         mp.insert(pair<int, string>(5, "6"));  // 这样插入元素
+        // map 结构是由一个个 pair<> 组织的
 
-        string tmp = mp[100];  // 不回报错，会为""
+        string string1 = mp[6];  // 空字符串 ""
+
+        map<int, int> mp1;
+        mp1[1]++;  // mp1 中有一个元素 pair<int, string>(1, 1)，即 1 -> 1
+        // map 值返回的是 指针
+
+        string tmp = mp[100];  // 不会报错，会为""
 
         cout << "size:" << mp.size() << endl;
 
@@ -146,6 +167,12 @@ public:
             cout << it->second << endl;
         }
 
+        // 遍历方式 2
+        for (auto&[k, v]: mp) {
+            cout << k << endl;
+            cout << v << endl;
+        }
+
         // 判断是否为空
         bool b1 = mp.empty();
         if (b1) {
@@ -156,17 +183,22 @@ public:
     void setTest() {
         int arr[5] = {0, 1, 2, 3, 4};
         set<int> iSet(arr, arr + 5);  // 由数组初始化 set
-
         set<int> emptySet;  // 定义空 set
+
+        // 添加元素
         iSet.insert(3);
         iSet.insert(3);
-        iSet.insert(5);  // 添加元素
+        iSet.insert(5);
+        // emplace 比 insert 快
+        iSet.emplace(8);
+        iSet.emplace(9);
+
         cout << "size:" << iSet.size() << endl;
         cout << "3 count = " << iSet.count(3) << endl;  // set.count(x) 只能返回0或1；可用来判断元素是否存在过
 
         iSet.erase(1);  // 删除元素
 
-        // 遍历
+        // 遍历 1
         set<int>::iterator it1 = iSet.begin();
         set<int>::iterator it2 = iSet.end();
         for (; it1 != it2; it1++) {  // 遍历；所有元素都会根据元素的键值自动排序
@@ -174,6 +206,17 @@ public:
         }
         cout << endl;
 
+        // 遍历 2
+        for (auto &u: iSet) {
+            // ...
+            cout << u << endl;
+        }
+
+        // 查找
+        int n1 = iSet.count(3);  // set.count(x) 只能返回0或1；可用来判断元素是否存在过
+        if (n1 == 0) {
+            cout << "3 not found" << endl;
+        }
         it1 = iSet.find(3);
         if (it1 != iSet.end())  // set 中是否存在元素
             cout << "3 found" << endl;

@@ -29,6 +29,8 @@ int main() {
     Solution solution;
     Learning learning;  // 通过直接声明的方式即可创建对象
     learning.vecTest();
+    learning.mapTest();
+    learning.setTest();
     BinarySearch binarySearch;
 
     ListNode* node3 = new ListNode(3, nullptr);
