@@ -19,19 +19,13 @@ using namespace std;
 
 int main() {
     ruby::luo::luoFunc();
-    tuple<int, char, double> mytuple(10, 'a', 3.14);
-    pair<int, string> p(0, "sss");
-    pair<int, string> p1 = make_pair(9, "9");
-    std::cout << "mytuple has ";
-    std::cout << std::tuple_size<decltype(mytuple)>::value;
-    std::cout << " elements." << '\n';
 
     Solution solution;
     Learning learning;  // 通过直接声明的方式即可创建对象
     learning.vecTest();
     learning.mapTest();
     learning.setTest();
-    BinarySearch binarySearch;
+    learning.stringTest();
 
     ListNode* node3 = new ListNode(3, nullptr);
     ListNode* node2 = new ListNode(6, node3);
@@ -53,13 +47,13 @@ int main() {
     });
 
 
-    vector<int> dist = {88690,69213};
-    vector<int> speed = {1, 1};
-    vector<vector<int>> matrix = {{1,10},
-                                  {2,2},
-                                  {3,4}};
+    vector<int> dist = {88690, 69213};
+    vector<int> speed = {6, 3, 3, 2};
+    vector<vector<int>> matrix = {{1, 10},
+                                  {2, 2},
+                                  {3, 4}};
     vector<string> start = {"ant", "act", "tack"};
     vector<string> target = {"tack", "act", "acti"};
-    solution.minimumFinishTime(matrix, 6, 5);
+    solution.maximumProduct(speed, 2);
     return 0;
 }

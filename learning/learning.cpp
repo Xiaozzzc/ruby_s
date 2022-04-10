@@ -25,8 +25,11 @@ public:
     void stringTest() {
         string s = "abc";
         string s1 = "hello";
+        s1[1] = 'a';  // 可以直接改变
         string s2 = "hello world";
         string s3;  // ""
+
+        // 字符串的拼接
         char c;  // \0
         char c1 = 'a';
         s += s1 + s2;
@@ -48,7 +51,7 @@ public:
         if (s.find('u', 3) != string::npos) {  // 从下标3开始查找
         }
 
-        // 取子串
+        // 取子串，注意，是从 下标 1 开始，取长度为 2 的子串
         string sub = s.substr(1, 2);
 
         // 删除
@@ -64,6 +67,13 @@ public:
         // endWith
         if (s1.find(s2) == s1.size() - s2.size()) {
         }
+
+        // 字符串转整数
+        string l = "120";
+        int i = stoi(l);
+
+        // 整数转字符串
+        string t = to_string(i);
     }
 
     void vecTest() {
@@ -84,6 +94,10 @@ public:
         int rightSize = right.size();
         right.push_back(10);
         int newRightSize = right.size();
+
+        // 取数组最后的元素
+        int bk = right.back();
+        right.pop_back();  // 弹出数组最后的元素，数组元素 - 1
 
         vector<int> u{1, 2, 3, 4, 5};
         vector<int> num = {2, 4, 5, 1, 3, 6};
@@ -249,6 +263,7 @@ public:
     }
 
     void priorityQueueTest() {
+        // 默认从大到小排列
         // 默认大顶堆；等同于 priority_queue<int, vector<int>, less<int> > a;
         priority_queue<int> a;
         priority_queue<int, vector<int>, greater<int> > c;  // 这样就是小顶堆
@@ -260,9 +275,9 @@ public:
             c.push(i);
         }
 
-        while (!a.empty()) {
-            cout << a.top() << ' ';
-            a.pop();
+        while (!a.empty()) {  // 判空
+            cout << a.top() << ' ';  // 取顶
+            a.pop();  // 后弹出
         }
         cout << endl;
 
@@ -280,5 +295,14 @@ public:
             b.pop();
         }
         cout << endl;
+    }
+
+    void dataStructureTest() {
+        tuple<int, char, double> myTuple(10, 'a', 3.14);
+        pair<int, string> p(0, "sss");
+        pair<int, string> p1 = make_pair(9, "9");
+        std::cout << "myTuple has ";
+        std::cout << std::tuple_size<decltype(myTuple)>::value;
+        std::cout << " elements." << '\n';
     }
 };
