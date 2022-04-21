@@ -23,8 +23,13 @@ struct TreeNode {
 
 class DFS {
 public:
+    /*
+     * 687. 最长同值路径
+     *
+     * 求最长同值路径，带返回，并非从上到下。
+     */
     int longestUnivaluePath(TreeNode* root) {
-        if(root == nullptr) return 0;
+        if (root == nullptr) return 0;
         dfs(root);
         return ret - 1;
     }
@@ -35,10 +40,8 @@ public:
         if (tn == nullptr) return 0;
         int l = dfs(tn->left);
         int r = dfs(tn->right);
-        if (tn->left != nullptr && tn->val == tn->left->val) {
-        } else l = 0;
-        if (tn->right != nullptr && tn->val == tn->right->val) {
-        } else r = 0;
+        l = tn->left != nullptr && tn->val == tn->left->val ? l : 0;
+        r = tn->right != nullptr && tn->val == tn->right->val ? r : 0;
         ret = max(ret, l + r + 1);
         return max(l, r) + 1;
     }

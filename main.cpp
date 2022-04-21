@@ -46,14 +46,14 @@ int main() {
         return vt[a[0]][a[1]] < vt[b[0]][b[1]];
     });
 
-    vector<vector<int>> matrix = {{23,17,15,3,20},
-                                  {8,1,20,27,11},
-                                  {9,4,6,2,21},
-                                  {40,9,1,10,6},
-                                  {22,7,4,5,3}};
+    vector<vector<int>> matrix = {{23, 17, 15, 3,  20},
+                                  {8,  1,  20, 27, 11},
+                                  {9,  4,  6,  2,  21},
+                                  {40, 9,  1,  10, 6},
+                                  {22, 7,  4,  5,  3}};
 
-    vector<int> dist = {-1,0,1};
-    vector<int> speed = {2,2,3,3,2,4,4,4,4,4};
+    vector<int> dist = {-1, 0, 1};
+    vector<int> speed = {2, 2, 3, 3, 2, 4, 4, 4, 4, 4};
 
     vector<string> start = {"ant", "act", "tack"};
     vector<string> target = {"tack", "act", "acti"};
