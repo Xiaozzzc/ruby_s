@@ -58,6 +58,6 @@ int main() {
     vector<string> start = {"ant", "act", "tack"};
     vector<string> target = {"tack", "act", "acti"};
     string s = "00000000";
-    solution.longestPath(dist, "aab");
+    // solution.longestPath(dist, "aab");
     return 0;
 }

@@ -79,6 +79,11 @@ public:
     void vecTest() {
         vector<int> init;
         // init[10] = 9;  会报错，因为根本没有分配空间
+
+        init.resize(10);  // init 里面 10 个 0
+        init.push_back(1);  // init.size() == 11
+        init[20] = 90;  // 并不会报错
+
         vector<int> left(10);  // 定义大小为 10 的vector，初始值为 0
         vector<int> right(10, 20);  // 定义大小为 10 的vector，初始值为 20
 
@@ -105,9 +110,8 @@ public:
 
         int t0 = num[100];  // t0 = 0, 不会报错
         num[100] = 250;  // 不会报错
-        int q = num[100];  // 250
         int t1 = num[100];  // t1 = 250
-        int t2 = num.size();  // t2 = 11
+        int t2 = num.size();  // t2 = 11 (5 + 6)
 
         // 将 vector 从小到大排序
         sort(num.begin(), num.end());
@@ -125,7 +129,11 @@ public:
         }
 
         // 二维 vector
+
+        vector<vector<int>> grid(2, vector<int>(10));  // gird 为 2 * 10 的值为 0 的矩阵
         vector<vector<int>> graph;
+        graph.resize(2);  // 这样分配空间后就可以开始用了，此时 graph 里两个 size() == 0 的 vector
+
         vector<int> a = {1, 2, 3, 4};
         vector<int> b = {5, 6, 7};
 
@@ -182,7 +190,7 @@ public:
         }
 
         // 遍历方式 2
-        for (auto&[k, v]: mp) {
+        for (auto &[k, v]: mp) {
             cout << k << endl;
             cout << v << endl;
         }
