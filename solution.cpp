@@ -15,31 +15,6 @@ using namespace std;
 class Solution {
 public:
 
-    int longestPath(vector<int> &parent, string s) {
-        // 从后往前
-        int n = parent.size();
-        vector<vector<int>> ps(n, vector<int>(2));  // vector<int>(n) 只关心最长的两个
-        int ret = 0;
-        for (int i = n - 1; i >= 0; i--) {
-            int p = parent[i];
-            vector<int>& cur = ps[i];
-            if (p != -1 && s[p] == s[i]) {
-                ret = max(ret, cur[0] + cur[1] + 1);
-                continue;
-            }
-            if (p == -1) {
-                ret = max(ret, cur[0] + cur[1] + 1);
-                continue;
-            }
-            vector<int>& prt = ps[p];
-            int report = cur[0] + 1;
-            if (report > prt[0]) prt[0] = report;
-            else if (report > prt[1]) prt[1] = report;
-
-            ret = max(ret, cur[0] + cur[1] + 1);
-        }
-        return ret;
-    }
 
     int maxTrailingZeros(vector<vector<int>> &grid) {
         int m = grid.size();
@@ -145,7 +120,7 @@ public:
             mp[u]++;
         }
         int res = 0;
-        for (auto&[k, v]: mp) {
+        for (auto &[k, v]: mp) {
             if (v == 1) return -1;
             res += cal(v);
         }
