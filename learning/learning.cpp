@@ -314,9 +314,18 @@ public:
         std::cout << " elements." << '\n';
     }
 
+    struct Foo {
+        ~Foo() { std::cout << "destruction" << std::endl; }
+    };
+
+    Foo FooFactory() {
+        return Foo();
+    }
+
     void pointerTest() {
         // &
         // 取变量地址 &a
+        // 引用 void pointerTest(vector<int>& vec) {...}
         //
         // *
         // 代表指针 int*
@@ -329,5 +338,44 @@ public:
 
         cout << a << endl;  // 9
         cout << b << endl;  // 8
+    }
+
+    void operatorTest() {
+
+        // && 右值引用
+        std::cout << "before copy constructor..." << std::endl;
+        Foo foo1 = FooFactory();  // 这一步，会创建一个 Foo 对象（右边），再复制创建左边的对象，总共创建、销毁两个对象，打印两个 "destruction" (clang 编译器)
+        std::cout << "after copy constructor..." << std::endl << std::endl;
+        // && 表示引用右值，避免生成新对象
+        Foo &&foo2 = FooFactory();
+        std::cout << "life time ends!" << std::endl << std::endl;
+    }
+
+    void constTest() {
+        // const 是 constant 的缩写，意为不变的量
+        const int m = 8;
+        int* p = (int*) &m;
+        *p = 9;
+        cout << m << endl;  // 8
+
+        int a = 8;
+        int* const p2 = &a;  // 指向的地址不能变
+        *p2 = 9; // 正确
+        int  b = 7;
+        // p2 = &b; // 错误
+    }
+
+    void stdTest() {
+
+        // std::move 将对象的状态或者所有权从一个对象转移到另一个对象
+        std::string str = "Hello";
+        std::vector<std::string> v;
+        // simple copy
+        v.push_back(str);
+        std::cout << "After copy, str is \"" << str << "\"\n";  // str = "Hello"
+        // move
+        v.push_back(std::move(str));
+        std::cout << "After move, str is \"" << str << "\"\n";  // str = ""
+        std::cout << "The contents of the vector are \"" << v[0] << "\", \"" << v[1] << "\"\n";
     }
 };

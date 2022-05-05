@@ -26,7 +26,8 @@ int main() {
     learning.mapTest();
     learning.setTest();
     learning.stringTest();
-    learning.pointerTest();
+    learning.stdTest();
+    learning.operatorTest();
 
     ListNode* node3 = new ListNode(3, nullptr);
     ListNode* node2 = new ListNode(6, node3);
