@@ -26,6 +26,7 @@ int main() {
     learning.mapTest();
     learning.setTest();
     learning.stringTest();
+    learning.pointerTest();
 
     ListNode* node3 = new ListNode(3, nullptr);
     ListNode* node2 = new ListNode(6, node3);
@@ -58,6 +59,7 @@ int main() {
     vector<string> start = {"ant", "act", "tack"};
     vector<string> target = {"tack", "act", "acti"};
     string s = "00000000";
+
     // solution.longestPath(dist, "aab");
     return 0;
 }

@@ -313,4 +313,21 @@ public:
         std::cout << std::tuple_size<decltype(myTuple)>::value;
         std::cout << " elements." << '\n';
     }
+
+    void pointerTest() {
+        // &
+        // 取变量地址 &a
+        //
+        // *
+        // 代表指针 int*
+        // 取指针变量指向的值 *pt
+        int a = 8;
+        int* pt = &a;
+        int b = *pt;
+
+        *pt = 9;
+
+        cout << a << endl;  // 9
+        cout << b << endl;  // 8
+    }
 };
