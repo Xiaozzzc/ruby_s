@@ -25,6 +25,54 @@ class DFS {
 public:
 
     /*
+     * 2267. 检查是否有合法括号字符串路径
+     *
+     * 给出一个由 "(" ")" 组成的矩阵，现在要从矩阵的左上角到右下角，每一步可往下或往右
+     * 求经过路径上的所有符号，是否组成一个合法的括号序列
+     *
+     * 记忆化搜索
+     */
+    bool hasValidPath(vector<vector<char>> &grid) {
+        int m = grid.size(), n = grid[0].size();
+        bool state = false;
+        vector<vector<vector<int>>> visited(m, vector<vector<int>>(n, vector<int>(100)));  // 记忆化矩阵
+
+        // 定义内部函数
+        // function<void(int, int, int)> —— 定义函数，输入为 (int, int, int)
+        // [&dfs, &grid, &state, &visited, m, n] —— 引用外部的元素
+        function<void(int, int, int)> dfs = [&dfs, &grid, &state, &visited, m, n](int i, int j, int cnt) {
+            if (state) {
+                return;
+            }
+            if (visited[i][j][cnt] != 0) {
+                return;
+            }
+            visited[i][j][cnt] = 1;
+            if (grid[i][j] == '(') {
+                cnt++;
+            } else {
+                cnt--;
+            }
+            if (cnt < 0 || cnt > (m - 1 - i) + (n - 1 - j)) {  // 此处 cnt > (m - 1 - i) + (n - 1 - j) 条件不能少
+                return;
+            }
+            if (i + 1 == m && j + 1 == n) {
+                state = true;
+                return;
+            }
+            if (i + 1 < m) {
+                dfs(i + 1, j, cnt);
+            }
+            if (j + 1 < n) {
+                dfs(i, j + 1, cnt);
+            }
+        };
+
+        dfs(0, 0, 0);
+        return state;
+    }
+
+    /*
      * 2246. 相邻字符不同的最长路径
      *
      * n 个节点编号 0 - n-1，parent 长为 n 记录每个节点的父节点，s 为每个节点的值。
