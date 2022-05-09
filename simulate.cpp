@@ -16,6 +16,20 @@ class Simulate {
 public:
 
     /*
+     * 2264. 字符串中最大的 3 位相同数字
+     */
+    string largestGoodInteger(string num) {
+        char c = 0;
+        // 字符串中连续三个的组合判断，只需判断中间那个
+        for (int i = 1, n = num.size() - 1; i < n; ++i) {
+            if (num[i - 1] == num[i] && num[i] == num[i + 1]) {
+                c = max(c, num[i]);
+            }
+        }
+        return c == 0 ? "" : string(3, c);  // string(3, c) 表示由 3 个 c 字符组成的 string
+    }
+
+    /*
      * 5987. 删除元素后和的最小差值
      * 给出数组 nums 共有 3n 个元素，现删掉数组中的 n 个元素（元素顺序不变）
      * 使剩下 2n 个元素 "前 n 个之和 - 后 n 个之和" 最小，求该最小值

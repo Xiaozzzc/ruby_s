@@ -2,12 +2,14 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <unordered_map>
 #include <set>
 #include <stack>
 #include <queue>
 #include <tuple>
 #include <numeric>
 #include <algorithm>
+#include "dfs.cpp"
 
 using namespace std;
 
@@ -15,6 +17,42 @@ using namespace std;
 class Solution {
 public:
 
+    /*
+     * 2267. 检查是否有合法括号字符串路径
+     */
+    bool hasValidPath(vector<vector<char>> &grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+        search(0, 0, 0, m, n, grid);
+        return ret;
+    }
+
+    bool ret = false;
+
+    bool search(int left, int i, int j, int m, int n, vector<vector<char>> &grid) {
+        if (i >= m || j >= n) return false;
+        if (ret) return true;
+
+        if (grid[i][j] == ')') {
+            left--;
+        } else {
+            left++;
+        }
+
+        if (left < 0) {
+            return false;
+        }
+
+        if (i == m - 1 && j == n - 1) {
+            if (left == 0) {
+                ret = true;
+            }
+            return true;
+        }
+        bool down = search(left, i + 1, j, m, n, grid);
+        bool right = search(left, i, j + 1, m, n, grid);
+        return true;
+    }
 
     int maxTrailingZeros(vector<vector<int>> &grid) {
         int m = grid.size();

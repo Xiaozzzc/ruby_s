@@ -15,27 +15,25 @@ class Learning {
 
 public:
 
-    /*
-     * vector -> push_back(), find()
-     * set -> insert(), erase(), find()
-     * map -> insert(pair<int, string>()), find()
-     * stack -> push(), pop(), top(), empty()
-     * queue -> push(), pop(), front(), back(), empty()
-     */
     void stringTest() {
+        // char 的初始值
+        char c;  // \0
+
         string s = "abc";
         string s1 = "hello";
         s1[1] = 'a';  // 可以直接改变
         string s2 = "hello world";
+        // string 的初始值
         string s3;  // ""
 
         // 字符串的拼接
-        char c;  // \0
-        char c1 = 'a';
-        s += s1 + s2;
-        s3 += c1;
+        char c1 = 'a';  // 'a'
+        char c2 = 'a' + 2;  // 'c'
+        s += s1 + s2;  // string 可以连着拼接
+        s3 += c1;  // char 只能一个一个拼接
+        s3 += c2;
 
-        // 比较，小于 0 表示s1小；等于 0 表示相等
+        // 比较，小于 0 表示 s1 小；等于 0 表示相等
         int cmp = s1.compare(s2);
 
         // 交换两个字符串
@@ -74,8 +72,19 @@ public:
 
         // 整数转字符串
         string t = to_string(i);
+
+        string u = string(3, 'h');  // u = "hhh"
+
+        cout << u << endl;
     }
 
+    /*
+     * vector -> push_back(), find()
+     * set -> insert(), erase(), find()
+     * map -> insert(pair<int, string>()), find()
+     * stack -> push(), pop(), top(), empty()
+     * queue -> push(), pop(), front(), back(), empty()
+     */
     void vecTest() {
         vector<int> init;
         // init[10] = 9;  会报错，因为根本没有分配空间
@@ -361,7 +370,7 @@ public:
         int a = 8;
         int* const p2 = &a;  // 指向的地址不能变
         *p2 = 9; // 正确
-        int  b = 7;
+        int b = 7;
         // p2 = &b; // 错误
     }
 

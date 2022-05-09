@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <unordered_map>
 #include <set>
 #include <stack>
 #include <queue>
@@ -11,6 +12,50 @@ using namespace std;
 
 class dpLinear {
 public:
+
+    /*
+     * 2266. 统计打字方案数
+     *
+     * 给出九宫格键盘的打字字符串，求所有可能的打字方案有多少种
+     *
+     * e.g.
+     * pressedKeys = "22233"
+     * 共有 "aaadd", "abdd", "badd", "cdd", "aaae", "abe", "bae" 和 "ce" 8 种
+     * -> 8
+     *
+     * 一直累加
+     * 分别乘起加起来
+     * 都可以
+     */
+    int countTexts(string pressedKeys) {
+        unordered_map<char, int> m = {{'2', 3},
+                                      {'3', 3},
+                                      {'4', 3},
+                                      {'5', 3},
+                                      {'6', 3},
+                                      {'7', 4},
+                                      {'8', 3},
+                                      {'9', 4}};
+        int mod = 1e9 + 7, n = pressedKeys.size();
+        vector<long long> dp(n);
+        dp[0] = 1;
+        for (int i = 1; i < n; ++i) {
+            char c = pressedKeys[i];
+            int t = m[c];
+            for (int j = 1; j <= t; ++j) {
+                if (i - j >= 0) {
+                    dp[i] += dp[i - j];
+                    if (pressedKeys[i - j] != c) break;
+                } else {
+                    dp[i] += 1;
+                    break;
+                }
+            }
+            dp[i] %= mod;
+        }
+        return dp[n - 1];
+    }
+
     /*
      * 2188. 完成比赛的最少时间
      * 给出 tires 数组，其中每一个元素第一个数字表示 使用轮胎 第一圈需要耗费的时间，第二个数字 表示不换轮胎后面需要乘的系数
