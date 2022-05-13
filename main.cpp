@@ -29,6 +29,7 @@ int main() {
     learning.stringTest();
     learning.stdTest();
     learning.operatorTest();
+    learning.constTest();
 
     ListNode* node3 = new ListNode(3, nullptr);
     ListNode* node2 = new ListNode(6, node3);

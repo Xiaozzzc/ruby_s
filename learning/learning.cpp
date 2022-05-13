@@ -16,6 +16,7 @@ class Learning {
 public:
 
     void stringTest() {
+
         // char 的初始值
         char c;  // \0
 
@@ -372,6 +373,12 @@ public:
         *p2 = 9; // 正确
         int b = 7;
         // p2 = &b; // 错误
+
+
+        const int* p3 = &a;
+        // *p3 = 889; —— 错误，int 变量 *p3 是不可变的
+        int* const p4 = &a;
+        // p4 = &m; —— 错误 int* 类型变量 p4 是不可变的
     }
 
     void stdTest() {

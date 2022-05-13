@@ -53,7 +53,7 @@ public:
             } else {
                 cnt--;
             }
-            if (cnt < 0 || cnt > (m - 1 - i) + (n - 1 - j)) {  // 此处 cnt > (m - 1 - i) + (n - 1 - j) 条件不能少
+            if (cnt < 0 || cnt > (m - 1 - i) + (n - 1 - j)) {  // 此处 cnt > (m - 1 - i) + (n - 1 - j) 条件不能少，否则超空间复杂度
                 return;
             }
             if (i + 1 == m && j + 1 == n) {
