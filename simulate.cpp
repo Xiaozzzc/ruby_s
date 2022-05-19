@@ -28,6 +28,7 @@ public:
      *
      * 不要轻易将 区间 化为 实际 进行模拟。
      * 前缀和 + 二分查找
+     *
      */
     int maximumWhiteTiles1(vector<vector<int>> &tiles, int carpetLen) {
         sort(tiles.begin(), tiles.end(), [](const vector<int> &a, const vector<int> &b) {
