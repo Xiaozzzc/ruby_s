@@ -16,6 +16,74 @@ class Simulate {
 public:
 
     /*
+     * 2271. 毯子覆盖的最多白色砖块数
+     *
+     * 给定数组 vector<vector<int>> &tiles，每一个 tile 为一块白色砖块，覆盖 [a, b] 区域
+     * 有一块长度为 carpetLen 的毯子，求这块毯子最多覆盖多少快白色砖块？
+     *
+     * e.g.
+     * tiles = [[1,5],[10,11],[12,18],[20,25],[30,32]], carpetLen = 10
+     * -> 9
+     * 毯子从 10 开始，最多可覆盖 9 块砖块
+     *
+     * 不要轻易将 区间 化为 实际 进行模拟。
+     * 前缀和 + 二分查找
+     */
+    int maximumWhiteTiles1(vector<vector<int>> &tiles, int carpetLen) {
+        sort(tiles.begin(), tiles.end(), [](const vector<int> &a, const vector<int> &b) {
+            return a[0] < b[0];
+        });
+        const int n = tiles.size();
+        vector<long long> p(n + 1);  // 记录 从 0 到 当前 tile 之前有多少个砖
+        for (int i = 1; i <= n; i++) p[i] = p[i - 1] + tiles[i - 1][1] - tiles[i - 1][0] + 1;
+        int ans = 0;
+        vector<int> v(n);
+        for (int i = 0; i < n; i++) v[i] = tiles[i][0];  //
+        for (int i = 0; i < n; i++) {
+            // 二分查找 —— 毯子结束后 的第一个砖块
+            int idx = lower_bound(v.begin(), v.end(), v[i] + carpetLen) - v.begin();
+            int t = p[idx - 1] - p[i] +
+                    min(
+                            tiles[idx - 1][1] - tiles[idx - 1][0] + 1,  // 最后一个砖块的总长
+                            v[i] + carpetLen - v[idx - 1]  // 最后一块砖并没有盖完
+                    );
+            ans = max(ans, t);
+        }
+        return ans;
+    }
+
+    /*
+     * 2272. 最大波动的子字符串
+     * 求 最大波动的子字符串
+     *
+     * s = "aababbb"
+     * -> 3
+     * 最大波动的子字符串为 "babbb"，b 比 a 多 3 个
+     *
+     */
+    int largestVariance(string &s) {
+        int ans = 0;
+        for (char a = 'a'; a <= 'z'; ++a)
+            for (char b = 'a'; b <= 'z'; ++b) {
+                if (a == b) continue;
+                int diff = 0;
+                int diff_with_b = -2e9;
+                for (char ch: s) {  // 计算 a 比 b 多多少个
+                    if (ch == a) {
+                        diff++;
+                        diff_with_b++;
+                    } else if (ch == b) {  // 遇到 b 才激活记录。。。
+                        diff--;
+                        diff_with_b = diff;
+                        diff = max(diff, 0);
+                    }
+                    ans = max(ans, diff_with_b);
+                }
+            }
+        return ans;
+    }
+
+    /*
      * 2264. 字符串中最大的 3 位相同数字
      */
     string largestGoodInteger(string num) {

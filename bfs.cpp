@@ -36,7 +36,7 @@ public:
         int m = grid.size(), n = grid[0].size();
         int low = pricing[0], high = pricing[1];
         int sx = start[0], sy = start[1];
-        vector<vector<int>> vis(m, vector<int>(n));  // 初始化 m * n 数组
+        vector<vector<int>> vis(m, vector<int>(n));  // 初始化 mp * n 数组
         vis[sx][sy] = 1;
         vector<vector<int>> q = {{sx, sy}};  // 直接这样初始化队列
         while (!q.empty()) { // 分层 BFS

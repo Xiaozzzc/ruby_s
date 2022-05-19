@@ -39,7 +39,7 @@ public:
 
         // 定义内部函数
         // function<void(int, int, int)> —— 定义函数，输入为 (int, int, int)
-        // [&dfs, &grid, &state, &visited, m, n] —— 引用外部的元素
+        // [&dfs, &grid, &state, &visited, mp, n] —— 引用外部的元素
         function<void(int, int, int)> dfs = [&dfs, &grid, &state, &visited, m, n](int i, int j, int cnt) {
             if (state) {
                 return;
@@ -53,7 +53,7 @@ public:
             } else {
                 cnt--;
             }
-            if (cnt < 0 || cnt > (m - 1 - i) + (n - 1 - j)) {  // 此处 cnt > (m - 1 - i) + (n - 1 - j) 条件不能少，否则超空间复杂度
+            if (cnt < 0 || cnt > (m - 1 - i) + (n - 1 - j)) {  // 此处 cnt > (mp - 1 - i) + (n - 1 - j) 条件不能少，否则超空间复杂度
                 return;
             }
             if (i + 1 == m && j + 1 == n) {
