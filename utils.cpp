@@ -9,13 +9,9 @@
 #include <tuple>
 #include <numeric>
 #include <algorithm>
-#include "dfs.cpp"
-#include "utils.cpp"
-#include "linkedLst.cpp"
 
 using namespace std;
 
-class Solution {
-public:
-
-};
+int gcd(int a, int b) {
+    return b == 0 ? a : gcd(b, a % b);
+}

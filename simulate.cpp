@@ -38,11 +38,11 @@ public:
         vector<long long> p(n + 1);  // 记录 从 0 到 当前 tile 之前有多少个砖
         for (int i = 1; i <= n; i++) p[i] = p[i - 1] + tiles[i - 1][1] - tiles[i - 1][0] + 1;
         int ans = 0;
-        vector<int> v(n);
-        for (int i = 0; i < n; i++) v[i] = tiles[i][0];  //
+        vector<int> v(n);  // 如果 vector 自己有序递增的话，可以直接用 lower_bound 来二分查找
+        for (int i = 0; i < n; i++) v[i] = tiles[i][0];
         for (int i = 0; i < n; i++) {
             // 二分查找 —— 毯子结束后 的第一个砖块
-            int idx = lower_bound(v.begin(), v.end(), v[i] + carpetLen) - v.begin();
+            int idx = lower_bound(v.begin(), v.end(), v[i] + carpetLen) - v.begin();  // lower_bound 要减去 v.begin()
             int t = p[idx - 1] - p[i] +
                     min(
                             tiles[idx - 1][1] - tiles[idx - 1][0] + 1,  // 最后一个砖块的总长

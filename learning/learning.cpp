@@ -41,14 +41,12 @@ public:
         s1.swap(s2);
 
         // 查找
-        int n = s.find("hel");  // 返回第一次找到的下标
+        // s = "abchallohello world"
+        int n = s.find("hel", 8);  // 从下标 5 开始返回第一次找到的下标
         int n1 = s.rfind("hel");  // 从后往前，返回第一次找到的下标
 
-        if (s.find('u') != string::npos) {
-        }
+        int n2 = s.find("lef");  // 如果找不到的话返回 -1
 
-        if (s.find('u', 3) != string::npos) {  // 从下标3开始查找
-        }
 
         // 取子串，注意，是从 下标 1 开始，取长度为 2 的子串
         string sub = s.substr(1, 2);
@@ -59,12 +57,13 @@ public:
         // 反转
         reverse(s.begin(), s.end());
 
+        // find
         // startWith
         if (s1.find(s2) == 0) {
         }
 
         // endWith
-        if (s1.find(s2) == s1.size() - s2.size()) {
+        if (s1.find(s2, s1.size() - s2.size()) != -1) {
         }
 
         // 字符串转整数
@@ -165,13 +164,11 @@ public:
         mp.insert(pair<int, string>(5, "6"));  // 这样插入元素
         // map 结构是由一个个 pair<> 组织的
 
-        string string1 = mp[6];  // 空字符串 ""
+        string s1 = mp[6];  // 对于不存在的 key，string value 返回 ""
 
         map<int, int> mp1;
         mp1[1]++;  // mp1 中有一个元素 pair<int, string>(1, 1)，即 1 -> 1
-        // map 值返回的是 指针
-
-        string tmp = mp[100];  // 不会报错，会为""
+        int u = mp1[9];  // 对于不存在的 key，int value 返回 0
 
         cout << "size:" << mp.size() << endl;
 
@@ -189,7 +186,7 @@ public:
             cout << "删除了" << endl;
         }
 
-        // 判断是否包含元素
+        // 包含 key
         if (mp.find(1) == mp.end()) {
             cout << "不包含该元素" << endl;
         }
@@ -216,7 +213,7 @@ public:
         mp2[1] = 1;
         mp2[2] = 2;
         mp2[3] = 3;
-        int lb = mp2.lower_bound(2)->first;  // 2; 第一个 大于等于
+        int lb = mp2.lower_bound(2)->first;  // 2; 第一个 大于等于；first 是 key，second 是 value
         int ub = mp2.upper_bound(2)->first;  // 3; 第一个 大于
         cout << lb << endl;
         cout << ub << endl;
@@ -269,6 +266,7 @@ public:
         if (it1 != iSet.end())
             cout << "1 not found" << endl;
 
+        auto it = lower_bound(iSet.begin(), iSet.end(), 4);  // ???
         iSet.clear();
     }
 
@@ -347,7 +345,7 @@ public:
     void pointerTest() {
         // &
         // 取变量地址 &a
-        // 引用 void pointerTest(vector<int>& vec) {...}
+        // 表引用 void pointerTest(vector<int>& vec) {...}
         //
         // *
         // 代表指针 int*

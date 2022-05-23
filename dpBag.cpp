@@ -9,9 +9,7 @@
 using namespace std;
 
 
-class DPBag {
-public:
-    /*
+/*
      * 279. 完全平方数
      * 给定一个数 n，求 n 最多能由几个完全平方数相加得到，返回其个数
      *
@@ -25,15 +23,14 @@ public:
      * -> 2
      *
      */
-    int numSquares(int n) {
-        vector<int> dp(n + 1, 0x3f3f3f3f);
-        dp[0] = 0;
-        for (int i = 1; i * i <= n; i++) {
-            int cur = i * i;
-            for (int j = cur; j <= n; j++) {
-                dp[j] = min(dp[j], dp[j - cur] + 1);
-            }
+int numSquares(int n) {
+    vector<int> dp(n + 1, 0x3f3f3f3f);
+    dp[0] = 0;
+    for (int i = 1; i * i <= n; i++) {
+        int cur = i * i;
+        for (int j = cur; j <= n; j++) {
+            dp[j] = min(dp[j], dp[j - cur] + 1);
         }
-        return dp[n];
     }
-};
+    return dp[n];
+}

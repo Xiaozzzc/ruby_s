@@ -10,16 +10,14 @@
 #include <numeric>
 #include <algorithm>
 #include "solution.cpp"
-#include "learning/nameSpace.cpp"
 #include "learning/learning.cpp"
-#include "binarySearch.cpp"
-#include "linkedLst.cpp"
 
 using namespace std;
 
 
 int main() {
-    ruby::luo::luoFunc();
+    std::mutex raftLock_;
+    std::lock_guard<std::mutex> g(raftLock_);
 
     Solution solution;
     Learning learning;  // 通过直接声明的方式即可创建对象
@@ -31,10 +29,10 @@ int main() {
     learning.operatorTest();
     learning.constTest();
 
-    ListNode* node3 = new ListNode(3, nullptr);
-    ListNode* node2 = new ListNode(6, node3);
-    ListNode* node1 = new ListNode(2, node2);
-    ListNode* node0 = new ListNode(5, node1);
+    ListNode *node3 = new ListNode(3, nullptr);
+    ListNode *node2 = new ListNode(6, node3);
+    ListNode *node1 = new ListNode(2, node2);
+    ListNode *node0 = new ListNode(5, node1);
 
 #define CREATE_FOR_TYPE(TYPE)
     CREATE_FOR_TYPE(UInt8)
@@ -42,9 +40,11 @@ int main() {
 #undef CREATE_FOR_TYPE
 
     vector<vector<int>> u = {{10, 11},
-                             {1, 1}};
-    vector<vector<int>> vt = {{0, 1},
-                              {2, 3}};
+                             {1,  1}};
+    vector<vector<int>> vt = {{1,          1000000000},
+                              {1000000000, 1000000000},
+                              {999999999,  1},
+                              {2,          999999999}};
 
 //    sort(u.begin(), u.end(), [vt](vector<int> a, vector<int> b) {
 //        return vt[a[0]][a[1]] < vt[b[0]][b[1]];
