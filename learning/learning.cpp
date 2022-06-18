@@ -15,6 +15,12 @@ class Learning {
 
 public:
 
+    // const
+    // inline
+    // friend
+    // template
+    // namespace
+
     void stringTest() {
 
         // char 的初始值
@@ -78,6 +84,22 @@ public:
         cout << u << endl;
     }
 
+
+
+    void update(vector<int>& items, int& item) {
+        auto l = items.begin();
+        auto r = items.end();
+        while (l < r) {
+            auto mid = l + ((r - l) >> 1);
+            if (*mid > item) {
+                r = mid;
+            } else {
+                l = mid + 1;
+            }
+        }
+        items.insert(l, 1, item);
+    }
+
     /*
      * vector -> push_back(), find()
      * set -> insert(), erase(), find()
@@ -114,9 +136,18 @@ public:
         right.pop_back();  // 弹出数组最后的元素，数组元素 - 1
 
         vector<int> u{1, 2, 3, 4, 5};
+        int l = u.back();
         vector<int> num = {2, 4, 5, 1, 3, 6};
+
+        vector<int> vk;
+        for (int n : num) {
+            update(vk, n);
+        }
         num.insert(num.end(), 5, 4);  // 在 num 的最后面添加 5 个 4
 
+        num.insert(num.begin(), 1, -1);
+
+        num.insert(num.begin() + 2, 1, -1);
         int t0 = num[100];  // t0 = 0, 不会报错
         num[100] = 250;  // 不会报错
         int t1 = num[100];  // t1 = 250

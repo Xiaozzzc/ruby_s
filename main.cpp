@@ -34,10 +34,6 @@ int main() {
     ListNode *node1 = new ListNode(2, node2);
     ListNode *node0 = new ListNode(5, node1);
 
-#define CREATE_FOR_TYPE(TYPE)
-    CREATE_FOR_TYPE(UInt8)
-    CREATE_FOR_TYPE(UInt16)
-#undef CREATE_FOR_TYPE
 
     vector<vector<int>> u = {{10, 11},
                              {1,  1}};
@@ -63,6 +59,8 @@ int main() {
     vector<string> start = {"ant", "act", "tack"};
     vector<string> target = {"tack", "act", "acti"};
     string s = "00000000";
+
+    solution.swap(u, vt);
 
     // solution.maximumWhiteTiles(u, 2);
 
