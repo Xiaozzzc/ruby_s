@@ -11,11 +11,18 @@
 #include <algorithm>
 #include "solution.cpp"
 #include "learning/learning.cpp"
+#include "learning/memcpyTest.cpp"
+#include "learning/nameSpace.cpp"
+#include "learning/operatorTest.cpp"
+#include "learning/pointerTest.cpp"
+#include "learning/stdTest.cpp"
+#include "learning/templateTest.cpp"
 
 using namespace std;
 
 
 int main() {
+
     std::mutex raftLock_;
     std::lock_guard<std::mutex> g(raftLock_);
 
@@ -25,9 +32,6 @@ int main() {
     learning.mapTest();
     learning.setTest();
     learning.stringTest();
-    learning.stdTest();
-    learning.operatorTest();
-    learning.constTest();
 
     ListNode *node3 = new ListNode(3, nullptr);
     ListNode *node2 = new ListNode(6, node3);
@@ -56,11 +60,23 @@ int main() {
     vector<int> dist = {-1, 0, 1};
     vector<int> speed = {2, 2, 3, 3, 2, 4, 4, 4, 4, 4};
 
+    vector<int> res;
+    // resize(10) 表示把数组的长度重新设置为 10（不是大小变为 10 字节）
+    res.resize(10);
+    // res.data() + 1，这里的 1 是 一个 vector 元素，而不是一个字节
+    // dist.data() 表示 vector<int> dist 的起始位置
+    // dist.size() * sizeof(int) 表示字节长度
+    memcpy(res.data() + 1, dist.data(), dist.size() * sizeof(int));
+
+
     vector<string> start = {"ant", "act", "tack"};
     vector<string> target = {"tack", "act", "acti"};
     string s = "00000000";
 
     solution.swap(u, vt);
+
+    size_t st = 10;
+    cout << st << endl;
 
     // solution.maximumWhiteTiles(u, 2);
 
