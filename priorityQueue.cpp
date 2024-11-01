@@ -15,7 +15,7 @@ using namespace std;
 class PriorityQueue {
 public:
 
-    // 6039. Maximum Product After K Increments
+    // 2233. Maximum Product After K Increments
     int maximumProduct(vector<int> &nums, int k) {
         priority_queue<int, vector<int>, greater<int>> pq;  // 最小堆 升序的优先队列
 

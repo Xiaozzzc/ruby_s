@@ -137,4 +137,53 @@ public:
         ret = max(ret, l + r + 1);
         return max(l, r) + 1;
     }
+
+
+    // 2458. height-of-binary-tree-after-subtree-removal-queries
+    unordered_map<int, int> mp1; // val -> id
+    unordered_map<int, int> mp2; // id -> height
+    unordered_map<int, int> mp3; // id -> subtree nodes num
+
+    int id = 0;
+
+    int dfs(TreeNode *tn, int height) {
+        // return subtree nodes num
+        if (tn == NULL) {
+            return 0;
+        }
+        mp1[tn->val] = id;
+        mp2[id] = height;
+        id++;
+        int nl = dfs(tn->left, height + 1);
+        int nr = dfs(tn->right, height + 1);
+        mp3[mp1[tn->val]] = nl + nr + 1;
+        return nl + nr + 1;
+    }
+
+    vector<int> treeQueries(TreeNode *root, vector<int> &queries) {
+        dfs(root, 0);
+        vector<int> left(id, 0); // when node ID is removed, the max height of nodes where id < ID
+        vector<int> right(id, 0); // when node ID is removed, the max height of nodes where id > ID
+        for (int i = 0; i < id; i++) {
+            right[i] = mp2[i];
+            if (i > 0) {
+                left[i] = max(right[i], left[i - 1]);
+            }
+        }
+        for (int i = id - 1; i >= 0; i--) {
+            right[i] = mp2[i];
+            if (i < id - 1) {
+                right[i] = max(right[i], right[i + 1]);
+            }
+        }
+        vector<int> ans;
+
+        for (int i = 0; i < queries.size(); i++) {
+            int nodeId = mp1[queries[i]];
+            int hl = left[nodeId - 1];
+            int hr = nodeId + mp3[nodeId] < id ? right[nodeId + mp3[nodeId]] : 0;
+            ans.push_back(max(hl, hr));
+        }
+        return ans;
+    }
 };

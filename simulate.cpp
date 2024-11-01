@@ -341,4 +341,23 @@ public:
         for (auto &it: vec) ans.push_back(it.second);
         return ans;
     }
+
+    // 2051. longest-square-streak-in-an-array
+    int longestSquareStreak(vector<int> &nums) {
+        map<int, int> mp; // num -> number of nums that are it's square
+        sort(nums.begin(), nums.end());
+        int res = -1;
+        for (int num: nums) {
+            int sq = sqrt(num); // square root or num
+            if (sq * sq == num && mp.find(sq) != mp.end()) {
+                int t = mp[sq];
+                mp[num] = t + 1;
+                res = max(res, t + 1);
+            } else {
+                mp[num] = 1;
+            }
+        }
+        return res;
+    }
+
 };

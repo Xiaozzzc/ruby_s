@@ -10,6 +10,7 @@
 #include <numeric>
 #include <algorithm>
 #include "solution.cpp"
+#include "dp.cpp"
 #include "learning/learning.cpp"
 #include "learning/memcpyTest.cpp"
 #include "learning/nameSpace.cpp"
@@ -22,58 +23,53 @@ using namespace std;
 
 
 int main() {
-
     std::mutex raftLock_;
     std::lock_guard<std::mutex> g(raftLock_);
 
-    Solution solution;
-    Learning learning;  // 通过直接声明的方式即可创建对象
+    Learning learning;
     learning.vecTest();
     learning.mapTest();
     learning.setTest();
     learning.stringTest();
+
+    Solution solution;
 
     ListNode *node3 = new ListNode(3, nullptr);
     ListNode *node2 = new ListNode(6, node3);
     ListNode *node1 = new ListNode(2, node2);
     ListNode *node0 = new ListNode(5, node1);
 
+    /*
+     * 1
+     * |\
+     * 3 4
+     * | |\
+     * 2 6 5
+     *      \
+     *       7
+     */
+    TreeNode *tn6 = new TreeNode(7);
+    TreeNode *tn5 = new TreeNode(5, NULL, tn6);
+    TreeNode *tn4 = new TreeNode(6);
+    TreeNode *tn3 = new TreeNode(2);
+    TreeNode *tn2 = new TreeNode(4, tn4, tn5);
+    TreeNode *tn1 = new TreeNode(3, tn3, NULL);
+    TreeNode *tn0 = new TreeNode(1, tn1, tn2);
 
-    vector<vector<int>> u = {{10, 11},
-                             {1,  1}};
-    vector<vector<int>> vt = {{1,          1000000000},
-                              {1000000000, 1000000000},
-                              {999999999,  1},
-                              {2,          999999999}};
+    vector<vector<int> > matrix = {
+        {187,167,209,251,152,236,263,128,135},
+        {267,249,251,285,73,204,70,207,74},
+        {189,159,235,66,84,89,153,111,189},
+        {120,81,210,7,2,231,92,128,218},
+        {193,131,244,293,284,175,226,205,245}
+    };
 
-//    sort(u.begin(), u.end(), [vt](vector<int> a, vector<int> b) {
-//        return vt[a[0]][a[1]] < vt[b[0]][b[1]];
-//    });
-
-    vector<vector<int>> matrix = {{23, 17, 15, 3,  20},
-                                  {8,  1,  20, 27, 11},
-                                  {9,  4,  6,  2,  21},
-                                  {40, 9,  1,  10, 6},
-                                  {22, 7,  4,  5,  3}};
-
-
-    vector<int> dist = {-1, 0, 1};
-    vector<int> speed = {2, 2, 3, 3, 2, 4, 4, 4, 4, 4};
-
-    vector<int> res;
-    // resize(10) 表示把数组的长度重新设置为 10（不是大小变为 10 字节）
-    res.resize(10);
-    // res.data() + 1，这里的 1 是 一个 vector 元素，而不是一个字节
-    // dist.data() 表示 vector<int> dist 的起始位置
-    // dist.size() * sizeof(int) 表示字节长度
-    memcpy(res.data() + 1, dist.data(), dist.size() * sizeof(int));
 
 
     vector<string> start = {"ant", "act", "tack"};
     vector<string> target = {"tack", "act", "acti"};
     string s = "00000000";
 
-    solution.swap(u, vt);
 
     size_t st = 10;
     cout << st << endl;
