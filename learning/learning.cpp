@@ -30,14 +30,17 @@ public:
         // string initial value is ""
         string s3; // ""
 
+        string u = string(3, 'h'); // u = "hhh"
+        cout << u << endl;
+
         // concatenation of string
         char c1 = 'a'; // 'a'
         char c2 = 'a' + 2; // 'c'
-        s += s1 + s2; // string 可以连着拼接
-        s3 += c1; // char 只能一个一个拼接
+        s += s1 + s2;
+        s3 += c1;
         s3 += c2;
 
-        // cmp < 0 means s1 < s2
+        // s1 - s2
         int cmp = s1.compare(s2);
 
         // swap two strings
@@ -51,13 +54,15 @@ public:
         int n2 = s.find("lef"); // 如果找不到的话返回 -1
 
 
-        // 取子串，注意，是从 下标 1 开始，取长度为 2 的子串
+        // Take a substring
+        // From index 1 and takes a substring of length 2
         string sub = s.substr(1, 2);
 
-        // 删除
+        // erase
+        // From index 1 and erase a substring of length 3
         s1.erase(1, 3); // 删除 从下标1开始，长度为3的子串
 
-        // 反转
+        // reverse
         reverse(s.begin(), s.end());
 
         // find
@@ -69,16 +74,12 @@ public:
         if (s1.find(s2, s1.size() - s2.size()) != -1) {
         }
 
-        // 字符串转整数
+        // stoi() -> string to int
         string l = "120";
         int i = stoi(l);
 
-        // 整数转字符串
+        // to_string() -> int to string
         string t = to_string(i);
-
-        string u = string(3, 'h'); // u = "hhh"
-
-        cout << u << endl;
     }
 
 
@@ -159,9 +160,9 @@ public:
         sort(num.begin(), num.end(), [](int a, int b) { return a > b; });
 
         // sort Two-dimensional array
-        vector<vector<int>> en = {{1,2}, {4,1}, {3,5}, {3,4}, {3,7}};
-        sort(en.begin(), en.end(), [](auto& a, auto& b){
-            if(a[0] != b[0]) return a[0] < b[0];
+        vector<vector<int> > en = {{1, 2}, {4, 1}, {3, 5}, {3, 4}, {3, 7}};
+        sort(en.begin(), en.end(), [](auto &a, auto &b) {
+            if (a[0] != b[0]) return a[0] < b[0];
             return a[1] > b[1];
         });
 
@@ -192,53 +193,58 @@ public:
     }
 
     void mapTest() {
-        map<int, string> mp; // map中的元素是自动按Key升序排序，跟set一样
+        map<int, string> mp; // map ordered by Key ascending
+        unordered_map<int, string> unmp;  // unordered map
+
+        // insert
         mp[1] = "2";
         mp[2] = "3";
         mp[3] = "4";
         mp[4] = "5";
-        mp.insert(pair<int, string>(5, "6")); // 这样插入元素
-        // map 结构是由一个个 pair<> 组织的
+        mp.insert(pair<int, string>(5, "6")); // map is formed by pair<>
 
-        string s1 = mp[6]; // 对于不存在的 key，string value 返回 ""
+        string s1 = mp[6]; // return "" for key that doesn't exist
 
         map<int, int> mp1;
-        mp1[1]++; // mp1 中有一个元素 pair<int, string>(1, 1)，即 1 -> 1
-        int u = mp1[9]; // 对于不存在的 key，int value 返回 0
+        mp1[1]++; // mp1[1] = 1
+        int u = mp1[9]; // return 0 for key that not exist
 
+        int qoq = mp1[3];
         cout << "size:" << mp.size() << endl;
 
-        // map本身就是按key排序，自有序
-        // 通过map对象的方法获取的 iterator 数据类型是一个 std::pair 对象
-        // 包括两个数据 iterator -> first和 iterator -> second 分别代表 关键字 和 存储的数据
-        map<int, string>::iterator iter1 = mp.lower_bound(1); // 1, "2"
-        map<int, string>::iterator iter2 = mp.upper_bound(1); // 2, "3"
+        // map is sorted by key ascending
+        map<int, string>::iterator iter1 = mp.lower_bound(1);
+        // 1, "2"   not less than(greater or equal to) the given value
+        map<int, string>::iterator iter2 = mp.upper_bound(1); // 2, "3"   greater than the given value
         map<int, string>::iterator iter3 = mp.find(1); // 1, "2"
         cout << iter1->second << endl;
 
-        // map删除元素
+        // map erase
         bool b = mp.erase(1);
         if (b) {
             cout << "删除了" << endl;
         }
 
-        // 包含 key
+        // map find key
         if (mp.find(1) == mp.end()) {
-            cout << "不包含该元素" << endl;
+            cout << "not contain that element" << endl;
+        }
+        if (!mp.count(1)) {
+            cout << "contain that element" << endl;
         }
 
-        // 遍历
+        // map traversal
         for (map<int, string>::iterator it = mp.begin(); it != mp.end(); it++) {
             cout << it->second << endl;
         }
 
-        // 遍历方式 2
+        // map traversal 2
         for (auto &[k, v]: mp) {
             cout << k << endl;
             cout << v << endl;
         }
 
-        // 判断是否为空
+        // Determine whether it is empty
         bool b1 = mp.empty();
         if (b1) {
             cout << "map 为空" << endl;
@@ -249,8 +255,8 @@ public:
         mp2[0] = 0;
         mp2[4] = 2;
         mp2[6] = 3;
-        int lb = mp2.lower_bound(2)->first; // 2; 第一个 大于等于；first 是 key，second 是 value
-        int ub = mp2.upper_bound(4)->first; // 3; 第一个 大于
+        int lb = mp2.lower_bound(4)->first; // 4; First bigger than or equal to
+        int ub = mp2.upper_bound(4)->first; // 6; First bigger than
         cout << lb << endl;
         cout << ub << endl;
     }
@@ -273,7 +279,7 @@ public:
 
         iSet.erase(1); // 删除元素
 
-        // 遍历 1
+        // set traverse 1
         set<int>::iterator it1 = iSet.begin();
         set<int>::iterator it2 = iSet.end();
         for (; it1 != it2; it1++) {
@@ -282,13 +288,13 @@ public:
         }
         cout << endl;
 
-        // 遍历 2
+        // set traverse 2
         for (auto &u: iSet) {
             // ...
             cout << u << endl;
         }
 
-        // 查找
+        // set find
         int n1 = iSet.count(3); // set.count(x) 只能返回0或1；可用来判断元素是否存在过
         if (n1 == 0) {
             cout << "3 not found" << endl;
@@ -306,11 +312,10 @@ public:
     }
 
     void stackTest() {
-        stack<int> stack; // 定义stack
-        stack.push(1); // 添加元素
+        stack<int> stack;
+        stack.push(1); // .push()
         if (!stack.empty()) {
-            // 判空
-            int top = stack.top(); // 取栈顶
+            int top = stack.top(); // .top()
             cout << top << endl;
             stack.pop();
         }
@@ -338,7 +343,7 @@ public:
     void priorityQueueTest() {
         // Descending by default
         // 默认大顶堆；等同于 priority_queue<int, vector<int>, less<int> > a;
-        priority_queue<int> a;  // descending
+        priority_queue<int> a; // descending
         priority_queue<int, vector<int>, greater<int> > c; // 这样就是小顶堆
 
         priority_queue<string> b;

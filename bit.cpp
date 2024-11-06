@@ -15,22 +15,15 @@
 using namespace std;
 
 /*
- * 2275. 按位与结果大于零的最长组合
- *
- * e.g.
- * candidates = [16,17,71,62,12,24,14]
- * -> 4
- * 组合 [16,17,62,24] 的按位与结果是 16 & 17 & 62 & 24 = 16 > 0
+ * 2275. largest combination with Bitwise AND greater than zero
  */
-void process(vector<int> &acc, int u) {
+void process(vector<int> &acc, int u) { // turn integer into binary
     int i = 0;
     while (u > 0) {
-        int t = u % 2;
-        if (t == 1) {
+        if (u % 2 == 1) {
             acc[i]++;
-            u -= 1;
         }
-        u /= 2;
+        u /= 2; // u >>= 1
         i++;
     }
 }
@@ -49,31 +42,54 @@ int largestCombination(vector<int> &candidates) {
 }
 
 /*
- * 5978. 统计追加字母可以获得的单词数
+ * 2135. count-words-obtained-after-adding-a-letter
  */
-int sToInt(string s) {  // s中字符不重复，将string转化为int
-    int ans = 0;
+int sToInt(string s) {
+    int ret = 0;
     for (int i = 0; i < s.size(); i++) {
-        ans |= 1 << (s[i] - 'a');
+        ret |= 1 << (s[i] - 'a');
     }
-    return ans;
+    return ret;
 }
 
 int wordCount(vector<string> &startWords, vector<string> &targetWords) {
-    set<int> iSet;
-    for (auto s: startWords) {
-        iSet.insert(sToInt(s));
-    }
+    set<int> st;
     int ans = 0;
+    for (auto s: startWords) {
+        st.insert(sToInt(s));
+    }
     for (auto s: targetWords) {
-        int it = sToInt(s);
+        int t = sToInt(s);
         for (int i = 0; i < s.size(); i++) {
-            int t = it - (1 << (s[i] - 'a'));
-            if (iSet.find(t) != iSet.end()) {
+            int t1 = t - (1 << (s[i] - 'a'));
+            if (st.count(t1)) {
                 ans++;
                 break;
             }
         }
     }
     return ans;
+}
+
+// 3011. Find if array can be sorted
+bool canSortArray(vector<int> &nums) {
+    pair<int, int> pre = {INT_MIN, INT_MIN}, cur; // {min, max}, define a pair {}
+    int preBit = -1;
+    for (int i = 0; i < nums.size(); i++) {
+        int t = nums[i];
+        int b = __builtin_popcount(t);  // bit count function
+        if (b != preBit) {
+            // move on
+            if (cur.first < pre.second) {
+                return false;
+            }
+            pre = cur;
+            cur = {t, t};
+            preBit = b;
+        } else {
+            cur.first = min(t, cur.first);
+            cur.second = max(t, cur.second);
+        }
+    }
+    return pre.second < cur.first;
 }
