@@ -34,10 +34,10 @@ int main() {
 
     Solution solution;
 
-    ListNode *node3 = new ListNode(3, nullptr);
-    ListNode *node2 = new ListNode(6, node3);
-    ListNode *node1 = new ListNode(2, node2);
-    ListNode *node0 = new ListNode(5, node1);
+    ListNode* node3 = new ListNode(3, nullptr);
+    ListNode* node2 = new ListNode(6, node3);
+    ListNode* node1 = new ListNode(2, node2);
+    ListNode* node0 = new ListNode(5, node1);
 
     /*
      * 1
@@ -48,31 +48,32 @@ int main() {
      *      \
      *       7
      */
-    TreeNode *tn6 = new TreeNode(7);
-    TreeNode *tn5 = new TreeNode(5, NULL, tn6);
-    TreeNode *tn4 = new TreeNode(6);
-    TreeNode *tn3 = new TreeNode(2);
-    TreeNode *tn2 = new TreeNode(4, tn4, tn5);
-    TreeNode *tn1 = new TreeNode(3, tn3, NULL);
-    TreeNode *tn0 = new TreeNode(1, tn1, tn2);
+    TreeNode* tn6 = new TreeNode(7);
+    TreeNode* tn5 = new TreeNode(5, NULL, tn6);
+    TreeNode* tn4 = new TreeNode(6);
+    TreeNode* tn3 = new TreeNode(2);
+    TreeNode* tn2 = new TreeNode(4, tn4, tn5);
+    TreeNode* tn1 = new TreeNode(3, tn3, NULL);
+    TreeNode* tn0 = new TreeNode(1, tn1, tn2);
 
-    vector<vector<int> > matrix = {
-        {187,167,209,251,152,236,263,128,135},
-        {267,249,251,285,73,204,70,207,74},
-        {189,159,235,66,84,89,153,111,189},
-        {120,81,210,7,2,231,92,128,218},
-        {193,131,244,293,284,175,226,205,245}
+    vector<vector<int>> matrix = {
+        {0, 0, 0},
+        {0, 0, 1},
+        {1, 1, 0},
     };
-
 
 
     vector<string> start = {"ant", "act", "tack"};
     vector<string> target = {"tack", "act", "acti"};
+    vector<int> vec = {1, 1, 1, 7, 8, 9};
     string s = "00000000";
 
 
     size_t st = 10;
     cout << st << endl;
+
+    solution.maxEqualRowsAfterFlips(matrix);
+    // solution.minimizedMaximum(7, vec);
 
     // solution.maximumWhiteTiles(u, 2);
 
