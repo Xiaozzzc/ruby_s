@@ -15,6 +15,47 @@ using namespace std;
 class Simulate {
 public:
 
+    // 1861. Rotating the Box
+    vector<vector<char>> rotateTheBox(vector<vector<char>>& box) {
+        vector<vector<char>> grid;
+        for (auto& vec : box) {
+            vector<char> newVec = sortVec(vec);
+            grid.push_back(newVec);
+        }
+        int n = grid.size();
+        int m = grid[0].size();
+        vector<vector<char>> ans(m, vector<char>(n));
+        for (int i = 0; i < n; i++) {
+            vector<char> row;
+            for (int j = 0; j < m; j++) {
+                ans[j][n - i - 1] = grid[i][j];
+            }
+        }
+        return ans;
+    }
+
+    vector<char> sortVec(vector<char> vec) {
+        int cntIt = 0;  // stone
+        int cntSp = 0;  // empty
+        vector<char> res;
+        for (char c : vec) {
+            if (c == '#') {  // stone
+                cntIt++;
+            } else if (c == '.') {  // empty
+                cntSp++;
+            } else {  // obstacle
+                for (int i = 0; i < cntSp; i++) res.push_back('.');
+                for (int i = 0; i < cntIt; i++) res.push_back('#');
+                res.push_back('*');
+                cntIt = 0;
+                cntSp = 0;
+            }
+        }
+        for (int i = 0; i < cntSp; i++) res.push_back('.');
+        for (int i = 0; i < cntIt; i++) res.push_back('#');
+        return res;
+    }
+
     /*
      * 2271. 毯子覆盖的最多白色砖块数
      *

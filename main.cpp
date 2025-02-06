@@ -62,6 +62,11 @@ int main() {
         {1, 1, 0},
     };
 
+    vector<vector<char>> charMatrix = {
+        {'#','.','*','.'},
+        {'#','#','*','.'},
+    };
+
 
     vector<string> start = {"ant", "act", "tack"};
     vector<string> target = {"tack", "act", "acti"};
@@ -72,7 +77,11 @@ int main() {
     size_t st = 10;
     cout << st << endl;
 
-    solution.maxEqualRowsAfterFlips(matrix);
+    string s1 = "siyolsdcjthwsiplccjbuceoxmpjgrauocx";
+    string s2 = "siyolsdcjthwsiplccpbuceoxmjjgrauocx";
+    solution.areAlmostEqual(s1, s2);
+    solution.rotateTheBox(charMatrix);
+
     // solution.minimizedMaximum(7, vec);
 
     // solution.maximumWhiteTiles(u, 2);

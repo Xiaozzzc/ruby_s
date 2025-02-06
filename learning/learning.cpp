@@ -20,8 +20,10 @@ public:
     // namespace
 
     void stringTest() {
-        // char initial value is \0
+        // char has no initial value
         char c; // \0
+        char ca;
+        char cb;
 
         string s = "abc";
         string s1 = "hello";
@@ -85,7 +87,7 @@ public:
 
     // update and maintain the order of vec
     // using binary search
-    void update(vector<int> &items, int &item) {
+    void update(vector<int>& items, int& item) {
         auto l = items.begin();
         auto r = items.end();
         while (l < r) {
@@ -140,7 +142,7 @@ public:
 
 
         vector<int> vk;
-        for (int n: num) {
+        for (int n : num) {
             update(vk, n);
         }
         num.insert(num.end(), 5, 4); // 在 num 的最后面添加 5 个 4
@@ -160,8 +162,8 @@ public:
         sort(num.begin(), num.end(), [](int a, int b) { return a > b; });
 
         // sort Two-dimensional array
-        vector<vector<int> > en = {{1, 2}, {4, 1}, {3, 5}, {3, 4}, {3, 7}};
-        sort(en.begin(), en.end(), [](auto &a, auto &b) {
+        vector<vector<int>> en = {{1, 2}, {4, 1}, {3, 5}, {3, 4}, {3, 7}};
+        sort(en.begin(), en.end(), [](auto& a, auto& b) {
             if (a[0] != b[0]) return a[0] < b[0];
             return a[1] > b[1];
         });
@@ -171,22 +173,26 @@ public:
             cout << num[i] << endl;
         }
 
-        for (int x: num) {
+        for (int x : num) {
             cout << x << endl;
         }
 
-        // 二维 vector
-        vector<vector<int> > grid(2, vector<int>(10)); // gird 为 2 * 10 的值为 0 的矩阵
-        vector<vector<int> > graph;
-        graph.resize(2); // 这样分配空间后就可以开始用了，此时 graph 里两个 size() == 0 的 vector
+        // sub vector
+        vector<int> vec = {0, 1, 2, 3, 4, 5, 6, 7};
+        vector<int> subVec(vec.begin() + 2, vec.begin() + 5);
+
+        // Two-dimensional vector
+        vector<vector<int>> grid(2, vector<int>(10)); // initialize
+        vector<vector<int>> graph;
+        graph.resize(2); // now graph has two vector that size() == 0
 
         vector<int> a = {1, 2, 3, 4};
         vector<int> b = {5, 6, 7};
 
         // 直接构建二维 vector
         graph = {a, b};
-        for (auto &x: graph) {
-            for (auto q: x) {
+        for (auto& x : graph) {
+            for (auto q : x) {
                 cout << q << endl;
             }
         }
@@ -194,7 +200,7 @@ public:
 
     void mapTest() {
         map<int, string> mp; // map ordered by Key ascending
-        unordered_map<int, string> unmp;  // unordered map
+        unordered_map<int, string> unmp; // unordered map
 
         // insert
         mp[1] = "2";
@@ -239,7 +245,7 @@ public:
         }
 
         // map traversal 2
-        for (auto &[k, v]: mp) {
+        for (auto& [k, v] : mp) {
             cout << k << endl;
             cout << v << endl;
         }
@@ -289,7 +295,7 @@ public:
         cout << endl;
 
         // set traverse 2
-        for (auto &u: iSet) {
+        for (auto& u : iSet) {
             // ...
             cout << u << endl;
         }
@@ -344,7 +350,7 @@ public:
         // Descending by default
         // 默认大顶堆；等同于 priority_queue<int, vector<int>, less<int> > a;
         priority_queue<int> a; // descending
-        priority_queue<int, vector<int>, greater<int> > c; // 这样就是小顶堆
+        priority_queue<int, vector<int>, greater<int>> c; // 这样就是小顶堆
 
         priority_queue<string> b;
 
