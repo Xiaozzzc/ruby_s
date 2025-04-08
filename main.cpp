@@ -45,21 +45,23 @@ int main() {
      * 3 4
      * | |\
      * 2 6 5
-     *      \
-     *       7
+     *   |  \
+     *   8   7
      */
-    TreeNode* tn6 = new TreeNode(7);
-    TreeNode* tn5 = new TreeNode(5, NULL, tn6);
-    TreeNode* tn4 = new TreeNode(6);
-    TreeNode* tn3 = new TreeNode(2);
-    TreeNode* tn2 = new TreeNode(4, tn4, tn5);
-    TreeNode* tn1 = new TreeNode(3, tn3, NULL);
-    TreeNode* tn0 = new TreeNode(1, tn1, tn2);
+    TreeNode* tn7 = new TreeNode(7);
+    TreeNode* tn5 = new TreeNode(5, NULL, tn7);
+    TreeNode* tn8 = new TreeNode(8);
+    TreeNode* tn6 = new TreeNode(6, tn8, NULL);
+    TreeNode* tn2 = new TreeNode(2);
+    TreeNode* tn4 = new TreeNode(4, tn6, tn5);
+    TreeNode* tn3 = new TreeNode(3, tn2, NULL);
+    TreeNode* tn1 = new TreeNode(1, tn3, tn4);
 
     vector<vector<int>> matrix = {
-        {0, 0, 0},
-        {0, 0, 1},
-        {1, 1, 0},
+        {3,2},
+        {4,3},
+        {4,4},
+        {2,5},
     };
 
     vector<vector<char>> charMatrix = {
@@ -70,7 +72,7 @@ int main() {
 
     vector<string> start = {"ant", "act", "tack"};
     vector<string> target = {"tack", "act", "acti"};
-    vector<int> vec = {1, 1, 1, 7, 8, 9};
+    vector<int> vec = {1,2,3};
     string s = "00000000";
 
 
@@ -79,12 +81,19 @@ int main() {
 
     string s1 = "siyolsdcjthwsiplccjbuceoxmpjgrauocx";
     string s2 = "siyolsdcjthwsiplccpbuceoxmjjgrauocx";
-    solution.areAlmostEqual(s1, s2);
-    solution.rotateTheBox(charMatrix);
 
+    // solution.largestDivisibleSubset(vec);
+    // solution.lengthOfLIS(vec);
+    // solution.subsetXORSum(vec);
+    // solution.lcaDeepestLeaves(tn0);
+    // solution.longestPalindrome("abcde", "ecdba");
+    // solution.longestPalindrome1("babad");
+    // solution.maximumScore(vec, 6);
     // solution.minimizedMaximum(7, vec);
 
     // solution.maximumWhiteTiles(u, 2);
+
+
 
     return 0;
 }

@@ -24,6 +24,20 @@ struct TreeNode {
 class DFS {
 public:
 
+    // Back Track
+    void backTrack(TreeNode* root, vector<int> vec) {
+        if (root == nullptr) {
+            return;
+        }
+
+        vec.push_back(root->val);
+
+        backTrack(root->left, vec);
+        backTrack(root->right, vec);
+
+        vec.pop_back();  // backtrack
+    }
+
     /*
      * 2267. 检查是否有合法括号字符串路径
      *

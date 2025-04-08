@@ -53,7 +53,7 @@ public:
         int n = s.find("hel", 8); // find the first occasion of "hel" from position 8
         int n1 = s.rfind("hel"); // from back to rear, find the first occasion of "hel"
 
-        int n2 = s.find("lef"); // 如果找不到的话返回 -1
+        int n2 = s.find("lef"); // -1 means not found
 
 
         // Take a substring
@@ -119,7 +119,7 @@ public:
         vector<int> left(10); // 定义大小为 10 的vector，初始值为 0
         vector<int> right(10, 20); // 定义大小为 10 的vector，初始值为 20
 
-        iota(left.begin(), left.end(), 10); // 10, 11, 12 ...
+        iota(left.begin(), left.end(), 10); // left = [10, 11, 12, ... ,19]
         int sum = accumulate(left.begin(), left.end(), 0); // 将left中的元素累加，累加初始值为 0
         cout << sum << endl;
 
@@ -150,8 +150,8 @@ public:
         num.insert(num.begin(), 1, -1);
 
         num.insert(num.begin() + 2, 1, -1);
-        int t0 = num[100]; // t0 = 0, 不会报错
-        num[100] = 250; // 不会报错
+        int t0 = num[100]; // t0 = 0, no error
+        num[100] = 250; // do nothing
         int t1 = num[100]; // t1 = 250
         int t2 = num.size(); // t2 = 11 (5 + 6)
 

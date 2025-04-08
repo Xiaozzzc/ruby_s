@@ -15,14 +15,14 @@
 
 using namespace std;
 
-class Solution {
+class greedy {
 public:
-    template<typename T>
-    void swap(T& a, T& b) {
-        T c = a;
-        a = b;
-        b = c;
+    // 3396. Minimum Number of Operations to Make Elements in Array Distinct
+    int minimumOperations(vector<int>& nums) {
+        vector<int> mpp(101);
+        for (int i = nums.size() - 1; i >= 0; --i)
+            if (++mpp[nums[i]] > 1)
+                return (i + 3) / 3;
+        return 0;
     }
-
-
 };

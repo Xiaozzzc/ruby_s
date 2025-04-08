@@ -33,6 +33,35 @@ public:
         return dp[n - 1];
     }
 
+    // dp from last to first
+    //
+    // 2140. Solving Questions With Brainpower
+    // given a list of questions,
+    // for single question [a,b], a is the score of it, but you need to skip next b questions after solving it
+    // return the maximum score you can possibly get
+    //
+    // [1,1],[2,2],[3,3],[4,4],[5,5]]
+    // -> 7
+    // [3,2],[4,3],[4,4],[2,5]
+    // -> 5
+    long long mostPoints(vector<vector<int>>& qs) {
+        // Get the number of questions
+        int n = qs.size();
+        vector<long long> dp(n, 0);  // dp[i] means max point you possible get after processing [i...last] questions
+        dp[n - 1] = qs[n - 1][0];  // starting from the last question
+        for (int i = n - 2; i >= 0; i--) {
+            // pick this question and previous question
+            long long pk = 0;
+            if (qs[i][1] + i + 1 < n) {
+                pk = (long long) qs[i][0] + dp[qs[i][1] + i + 1];
+            }
+            // not picking previous question, result in picking current question / go for the former one
+            long long np = max((long long) qs[i][0], dp[i + 1]);
+            dp[i] = max(pk, np);
+        }
+        return dp[0];
+    }
+
 
     /*
      * 377. 组合总和 Ⅳ
