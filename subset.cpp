@@ -22,22 +22,22 @@ public:
     // -> [],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]
     vector<vector<int>> subsets(vector<int>& nums) {
         vector<int> vec;
-        dfs(nums, vec, 0);
+        vector<vector<int>> ans;
+        dfs(nums, ans, vec, 0);
         return ans;
     }
 
-    vector<vector<int>> ans;
-    void dfs(vector<int>& nums, vector<int>& vec, int idx) {
+    void dfs(vector<int>& nums, vector<vector<int>>& ans, vector<int>& vec, int idx) {  // keep ans inside
         if (idx == nums.size()) {
             ans.emplace_back(vec); // autonomously create a new vector
             return;
         }
         // not picking nums[idx]
-        dfs(nums, vec, idx + 1);
+        dfs(nums, ans, vec, idx + 1);
 
         // picking nums[idx]
         vec.push_back(nums[idx]);
-        dfs(nums, vec, idx + 1);
+        dfs(nums, ans, vec, idx + 1);
         vec.pop_back();
     }
 
