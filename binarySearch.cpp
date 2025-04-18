@@ -11,20 +11,20 @@ using namespace std;
 
 class BinarySearch {
 public:
-    /*
-     * 典型二分
-     */
+    // lower_bound return the first num >= t
     int lower_bound(vector<int> nums, int l, int r, int t) {
         while (l < r) {
-            int mid = (l + r) >> 1;
-            if (nums[mid] >= t) {
+            int mid = l + r >> 1;
+            if (nums[mid] >= t) {  // if descending sequence nums <= t
                 r = mid;
             } else {
-                l = mid + 1; // 此处如果 l = mid 可能陷入死循环 —— 由于是向下取整，l 与 r 相差 1 的时候会导致 mid = l；此时如果 l = mid 会造成死循环
+                l = mid + 1; // l = mid might go into an infinite loop
             }
         }
-        return l; // 最终状态，l 等于 r，并且停留位置是 "分界线r侧的第一个"
+        return l;
     }
+
+    // upper_bound return the first num > t
 
     /*
      * 2187. 完成旅途的最少时间

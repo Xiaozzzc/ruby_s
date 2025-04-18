@@ -17,6 +17,8 @@ using namespace std;
 
 class Solution {
 public:
+    const int MOD = 1e9 + 7;
+
     template<typename T>
     void swap(T& a, T& b) {
         T c = a;

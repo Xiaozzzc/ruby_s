@@ -45,8 +45,39 @@ public:
                 }
             }
         }
+        // [l, r) -> substr(l, r - l)
+        // [l, r] or [l, r + 1) -> substr(l, r - l + 1)
         // [l, r + 1)
-        return s.substr(l, r + 1 - l);
+        return s.substr(l, r - l + 1);
+    }
+
+    // Citadel 1
+    // given a string s, return the number of substring that are palindrome
+    int palindrome(string s) {
+        int n = s.size();
+        vector<vector<bool>> dp(n, vector<bool>(n, true)); // dp[i][j] = true means substring [l, r] is palindrome
+        // int l = 0, r = 0;
+        set<string> st;
+        //   j
+        // i . T T T T T
+        //   . . T T T T
+        //   . . . T T T
+        //   . . x . T T
+        //   . *
+        for (int i = 0; i < n; i++) {
+            st.insert(s.substr(i, 1));
+        }
+        for (int j = 0; j < n; j++) {
+            for (int i = 0; i < j; i++) {
+                // substring [i, j]
+                dp[i][j] = s[i] == s[j] && dp[i + 1][j - 1];
+                if (dp[i][j]) {
+                    st.insert(s.substr(i, j - i + 1));
+                }
+            }
+        }
+        // [l, r + 1)
+        return st.size();
     }
 
     int longestPalindrome(string s, string t) {

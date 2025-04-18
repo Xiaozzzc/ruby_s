@@ -1,19 +1,38 @@
+#include "dfs.cpp"
+#include "linkedLst.cpp"
+// #include "utils.cpp"
+#include <algorithm>
 #include <iostream>
-#include <string>
-#include <vector>
 #include <map>
+#include <numeric>
+#include <queue>
 #include <set>
 #include <stack>
-#include <queue>
+#include <string>
 #include <tuple>
-#include <numeric>
-#include <algorithm>
+#include <unordered_map>
+#include <vector>
 
 using namespace std;
 
 class BFS {
 public:
-    void doNothing(void);
+
+    // level order traversal
+    vector<int> levelOrder(TreeNode* tn) {
+        queue<TreeNode *> q;
+        q.push(tn);
+        vector<int> ans;
+        while (!q.empty()) {
+            TreeNode* n = q.front();
+            q.pop();
+            ans.push_back(n->val);
+            if (n->left != nullptr) q.push(n->left);
+            if (n->right != nullptr) q.push(n->right);
+        }
+        return ans;
+    }
+
     /*
      * 2146. 价格范围内最高排名的 K 样物品
      * 给出grid，其中 0 是墙无法通过，1 是梯子可通过，其余是物品，求排名最高的 k 样物
@@ -39,7 +58,7 @@ public:
         vector<vector<int>> vis(m, vector<int>(n));  // 初始化 mp * n 数组
         vis[sx][sy] = 1;
         vector<vector<int>> q = {{sx, sy}};  // 直接这样初始化队列
-        while (!q.empty()) { // 分层 BFS
+        while (!q.empty()) {  // 分层 BFS
             // 此时 q 内所有元素到起点的距离均相同
             sort(q.begin(), q.end(), [&](auto &a, auto &b) {
                 int pa = grid[a[0]][a[1]], pb = grid[b[0]][b[1]];  // 价格从小到大，相同价格的话按方位排序

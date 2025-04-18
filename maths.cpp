@@ -15,6 +15,19 @@
 
 class Maths {
 public:
+    // quick power
+    long long quickPow(long long a, long long b, int mod) {
+        long long ans = 1;
+        while (b > 0) {
+            if (b & 1) {
+                ans = ans * a % MOD;
+            }
+            a = (a * a) % MOD;
+            b >>= 1;
+        }
+        return ans % MOD;
+    }
+
     // get primes of a given number
     // n = 18 -> [2, 3, 3]
     vector<int> getPrimes(int n) {
@@ -46,6 +59,27 @@ public:
             a = temp;
         }
         return a;
+    }
+
+    const int MOD = 1e9 + 7;
+    // 1922. Count Good Numbers
+    // a number is a "good number string" when it's even index digits are even(0,2,4,6,8) and odd index digits are prime(2,3,5,7)
+    // e.g.
+    // "2582" -> good
+    // "3245" -> not good
+    // given a number n return the total number of "good number string" with the length of n
+    // quick power
+    int countGoodNumbers(long long n) {
+        long long b = n / 2;
+        int ans = 1;
+        if (n % 2 == 1) {
+            ans = 5;
+        }
+        ans = (ans * quickPow(5, b, MOD)) % MOD;
+        ans = (ans * quickPow(4, b, MOD)) % MOD;
+        // ans *= quickPow(5, b, mod) % mod;
+        // ans *= quickPow(4, b, mod) % mod;
+        return ans % MOD;
     }
 
     // Median

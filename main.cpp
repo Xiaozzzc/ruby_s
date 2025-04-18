@@ -58,22 +58,22 @@ int main() {
     TreeNode* tn1 = new TreeNode(1, tn3, tn4);
 
     vector<vector<int>> matrix = {
-        {3,2},
-        {4,3},
-        {4,4},
-        {2,5},
+        {3, 2},
+        {4, 3},
+        {4, 4},
+        {2, 5},
     };
 
     vector<vector<char>> charMatrix = {
-        {'#','.','*','.'},
-        {'#','#','*','.'},
+        {'#', '.', '*', '.'},
+        {'#', '#', '*', '.'},
     };
 
 
     vector<string> start = {"ant", "act", "tack"};
     vector<string> target = {"tack", "act", "acti"};
-    vector<int> vec = {1,2,3};
-    string s = "00000000";
+    vector<int> vec = {1, 2, 3, 5, 5, 5, 8, 9, 10};
+    string s = "mokkori";
 
 
     size_t st = 10;
@@ -82,18 +82,11 @@ int main() {
     string s1 = "siyolsdcjthwsiplccjbuceoxmpjgrauocx";
     string s2 = "siyolsdcjthwsiplccpbuceoxmjjgrauocx";
 
-    // solution.largestDivisibleSubset(vec);
-    // solution.lengthOfLIS(vec);
-    // solution.subsetXORSum(vec);
-    // solution.lcaDeepestLeaves(tn0);
-    // solution.longestPalindrome("abcde", "ecdba");
-    // solution.longestPalindrome1("babad");
-    // solution.maximumScore(vec, 6);
-    // solution.minimizedMaximum(7, vec);
-
-    // solution.maximumWhiteTiles(u, 2);
-
-
+    int i = 10;
+    int j = 9;
+    j += i++;
+    // solution.segmentTreeTest();
+    solution.fenwickTreeTest();
 
     return 0;
 }

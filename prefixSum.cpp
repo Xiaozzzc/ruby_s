@@ -17,6 +17,115 @@ using namespace std;
 
 class prefixSum {
 public:
+    // prefix sum template
+    void prefixSumDemo(vector<int> nums) {
+        int n = nums.size();
+        vector<int> preSum(n + 1); // pre[i] is the sum from nums[0] to nums[i - 1]
+        preSum[0] = 0;
+        for (int i = 0; i < n; i++) {
+            preSum[i + 1] = preSum[i] + nums[i];
+        }
+    }
+
+    // prefix sum template 2D version
+    void prefixSumDemo(vector<vector<int>> nums) {
+        int m = nums.size();
+        int n = nums[0].size();
+        vector<vector<int>> preSum(m + 1, vector<int>(n + 1));
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                preSum[i + 1][j + 1] = preSum[i][j + 1] + preSum[i + 1][j] - preSum[i][j] + nums[i][j];
+            }
+        }
+    }
+
+    // Fenwick tree
+    // Used for prefix sum with constant update
+    // Also for counting how many numbers smaller/greater than current number
+    struct FenwickTree {
+        vector<int> BIT;
+        int n;
+
+        FenwickTree(int n): n(n), BIT(n + 1, 0) {
+        }
+
+        // add x to idx element (0-index)
+        void add(int idx, int x) {
+            idx++;
+            for (; idx <= n; idx += (idx & -idx)) {
+                BIT[idx] += x;
+            }
+        }
+
+        // return the sum of [0, idx] elements
+        int sum(int idx) {
+            // Prefix sum
+            int ans = 0;
+            idx++;
+            for (; idx > 0; idx -= (idx & -idx)) {
+                ans += BIT[idx];
+            }
+            return ans;
+        }
+    };
+
+    // Used for subarray sum with constant update
+    struct SegmentTree {
+        int n;
+        vector<int> seg;
+
+        SegmentTree(int n) : n(n), seg(2 * n) {
+        }
+
+        // increment the value x at position i (0-index)
+        void update(int i, int x) {
+            i += n;
+            seg[i] += x; // Increment the value at position i
+            for (i /= 2; i > 0; i /= 2) {
+                seg[i] = seg[2 * i] + seg[2 * i + 1];
+            }
+        }
+
+        // Return the sum of [l, r] (0-index)
+        int query(int l, int r) {
+            int sum = 0;
+            for (l += n, r += n; l <= r; l /= 2, r /= 2) {
+                if (l % 2 == 1) {
+                    sum += seg[l++];
+                }
+                if (r % 2 == 0) {
+                    sum += seg[r--];
+                }
+            }
+            return sum;
+        }
+    };
+
+    // 1314. Matrix Block Sum
+    // Input: mat = [[1,2,3],[4,5,6],[7,8,9]], k = 1
+    // Output: [[12,21,16],[27,45,33],[24,39,28]]
+    vector<vector<int>> matrixBlockSum(vector<vector<int>>& nums, int k) {
+        int m = nums.size();
+        int n = nums[0].size();
+        vector<vector<int>> preSum(m + 1, vector<int>(n + 1));
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                preSum[i + 1][j + 1] = preSum[i][j + 1] + preSum[i + 1][j] - preSum[i][j] + nums[i][j];
+            }
+        }
+        vector<vector<int>> ans(m, vector<int>(n));
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                int l = max(0, j - k);
+                int r = min(n - 1, j + k);
+                int t = max(0, i - k);
+                int b = min(m - 1, i + k);
+                ans[i][j] = preSum[b + 1][r + 1] - preSum[t][r + 1] - preSum[b + 1][l] + preSum[t][l];
+            }
+        }
+        return ans;
+    }
+
     // 2874. Maximum Value of an Ordered Triplet II
     long long maximumTripletValue(vector<int>& nums) {
         int n = nums.size();

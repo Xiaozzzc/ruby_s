@@ -5,4 +5,6 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(ruby_s main.cpp
         binaryTree.cpp
-        subset.cpp)
+        subset.cpp
+        slidingWindow.cpp
+)

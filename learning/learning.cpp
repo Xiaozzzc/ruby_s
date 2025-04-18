@@ -203,13 +203,24 @@ public:
         unordered_map<int, string> unmp; // unordered map
 
         // insert
-        mp[1] = "2";
-        mp[2] = "3";
-        mp[3] = "4";
-        mp[4] = "5";
-        mp.insert(pair<int, string>(5, "6")); // map is formed by pair<>
+        mp[1] = "1";
+        mp[2] = "2";
+        mp[3] = "3";
+        mp[4] = "4";
+        mp.insert(pair<int, string>(5, "5")); // map is formed by pair<>
+        mp[8] = "8";
 
-        string s1 = mp[6]; // return "" for key that doesn't exist
+        string s1 = mp[123]; // return "" for key that doesn't exist, but once mp[123] it's called it inserts (123, "") into mp
+        int cnt = mp.count(123);
+
+        // map is sorted by key ascending
+        map<int, string>::iterator iter1 = mp.lower_bound(5);  // (5, "5")
+        // 1, "2"   not less than(greater or equal to) the given value
+        map<int, string>::iterator iter2 = mp.upper_bound(5); // (8, "8")
+
+        map<int, string>::iterator iter3 = mp.find(1); // 1, "2"
+        cout << iter1->second << endl;
+
 
         map<int, int> mp1;
         mp1[1]++; // mp1[1] = 1
@@ -218,20 +229,13 @@ public:
         int qoq = mp1[3];
         cout << "size:" << mp.size() << endl;
 
-        // map is sorted by key ascending
-        map<int, string>::iterator iter1 = mp.lower_bound(1);
-        // 1, "2"   not less than(greater or equal to) the given value
-        map<int, string>::iterator iter2 = mp.upper_bound(1); // 2, "3"   greater than the given value
-        map<int, string>::iterator iter3 = mp.find(1); // 1, "2"
-        cout << iter1->second << endl;
-
         // map erase
         bool b = mp.erase(1);
         if (b) {
             cout << "删除了" << endl;
         }
 
-        // map find key
+        // map contain key
         if (mp.find(1) == mp.end()) {
             cout << "not contain that element" << endl;
         }
@@ -271,6 +275,9 @@ public:
         int arr[5] = {0, 1, 2, 3, 4};
         set<int> iSet(arr, arr + 5); // 由数组初始化 set
         set<int> emptySet; // 定义空 set
+
+        vector<int> nums = {1, 2, 3, 4, 5};
+        set<int> st(nums.begin(), nums.end()); // initialize by vector
 
         // 添加元素
         iSet.insert(3);
