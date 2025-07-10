@@ -18,6 +18,61 @@ using namespace std;
 
 class graph {
 public:
+    /***
+     * Ways to store a graph
+     *
+     * Adjacency Matrix
+     * matrix[i][j] == 1 if node i, j is connected, otherwise 0
+     *
+     * Adjacency List
+     * graph = {
+     *   'A': ['B', 'C'],
+     *   'B': ['A', 'D'],
+     *   'C': ['A'],
+     *   'D': ['B']
+     * }
+     *
+     */
+    // 2101. Detonate the Maximum Bombs
+    int maximumDetonation(vector<vector<int>>& bombs) {
+        int n = bombs.size();
+        vector<vector<int>> graph(n, vector<int>()); // graph[i][j] == 1 means nodes i and j are connected
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == j) continue;
+                if (connected(bombs[i][0], bombs[i][1], bombs[j][0], bombs[j][1], bombs[i][2])) {
+                    graph[i].push_back(j);
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            vector<int> visited(n);
+            int t = dfs(graph, visited, i);
+            ans = max(ans, t);
+        }
+        return ans;
+    }
+
+    // "vector<vector<int>>& graph", '&' is a must, to avoid repeatedly creating objects
+    int dfs(vector<vector<int>>& graph, vector<int>& visited, int cur) {
+        visited[cur] = 1;
+        int t = 1;
+        for (int next : graph[cur]) {
+            if (visited[next] == 1) {
+                continue;
+            }
+            t += dfs(graph, visited, next);
+        }
+        return t;
+    }
+
+    bool connected(int x1, int y1, int x2, int y2, long r1) {
+        long x12 = pow(x1 - x2, 2);
+        long y12 = pow(y1 - y2, 2);
+        return x12 + y12 <= r1 * r1;
+    }
+
     // citadel interview question 2
     // user with the most common friends is the recommended friend, if there are more than one, pick the one with the smallest id
     // given n users, and their friendships, find out each person's recommended friend

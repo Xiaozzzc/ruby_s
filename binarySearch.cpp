@@ -11,14 +11,15 @@ using namespace std;
 
 class BinarySearch {
 public:
-    // lower_bound return the first num >= t
-    int lower_bound(vector<int> nums, int l, int r, int t) {
-        while (l < r) {
+    // lower_bound return the first vec >= u
+    int lower_bound(vector<int> vec, int u) {
+        int l = 0, r = vec.size();  // * r = vec.size()
+        while (l < r) {  // * l < r
             int mid = l + r >> 1;
-            if (nums[mid] >= t) {  // if descending sequence nums <= t
+            if (vec[mid] >= u) {  // * vec[mid] >= u, if descending sequence vec <= u
                 r = mid;
             } else {
-                l = mid + 1; // l = mid might go into an infinite loop
+                l = mid + 1; // * l = mid + 1, l = mid might go into an infinite loop
             }
         }
         return l;

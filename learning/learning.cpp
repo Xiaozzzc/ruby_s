@@ -59,6 +59,10 @@ public:
         // Take a substring
         // From index 1 and takes a substring of length 2
         string sub = s.substr(1, 2);
+        // Take a substring [m1, m2)
+        int m1 = 3;
+        int m2 = 6;
+        string subm = s.substr(m1, m2 - m1);
 
         // erase
         // From index 1 and erase a substring of length 3
@@ -109,8 +113,21 @@ public:
      * queue -> push(), pop(), front(), back(), empty()
      */
     void vecTest() {
-        vector<int> init;
-        // init[10] = 9;  会报错，因为根本没有分配空间
+        // initialize
+        vector<int> init; // {}
+        vector<int> vec1(3); // {0, 0, 0}
+        vector<int> vec2(3, 2); // {2, 2, 2}
+        vector<int> vec3{3, 4, 5, 6};
+        vector<int> vec4(vec1.begin(), vec1.end()); // same as vec1
+
+        // use set to initialize vector
+        set<int> st;
+        st.insert(4);
+        st.insert(4);
+        st.insert(5);
+        st.insert(6);
+        vector<int> vec5(st.begin(), st.end()); // {4, 5, 6}
+
 
         init.resize(10); // init 里面 10 个 0
         init.push_back(1); // init.size() == 11
@@ -136,9 +153,8 @@ public:
         int bk = right.back();
         right.pop_back(); // 弹出数组最后的元素，数组元素 - 1
 
-        vector<int> u{1, 2, 3, 4, 5};
-        int l = u.back();
         vector<int> num = {2, 4, 5, 1, 3, 6};
+        int back = num.back();
 
 
         vector<int> vk;
@@ -164,8 +180,8 @@ public:
         // sort Two-dimensional array
         vector<vector<int>> en = {{1, 2}, {4, 1}, {3, 5}, {3, 4}, {3, 7}};
         sort(en.begin(), en.end(), [](auto& a, auto& b) {
-            if (a[0] != b[0]) return a[0] < b[0];
-            return a[1] > b[1];
+            if (a[0] != b[0]) return a[0] < b[0];  // a[0] from small to large
+            return a[1] > b[1];  // a[1] from large to small
         });
 
         int n = num.size();
@@ -209,12 +225,15 @@ public:
         mp[4] = "4";
         mp.insert(pair<int, string>(5, "5")); // map is formed by pair<>
         mp[8] = "8";
+        mp.erase(8);
+        int mpSize = mp.size();
 
-        string s1 = mp[123]; // return "" for key that doesn't exist, but once mp[123] it's called it inserts (123, "") into mp
+        string s1 = mp[123];
+        // return "" for key that doesn't exist, but once mp[123] it's called it inserts (123, "") into mp
         int cnt = mp.count(123);
 
         // map is sorted by key ascending
-        map<int, string>::iterator iter1 = mp.lower_bound(5);  // (5, "5")
+        map<int, string>::iterator iter1 = mp.lower_bound(5); // (5, "5")
         // 1, "2"   not less than(greater or equal to) the given value
         map<int, string>::iterator iter2 = mp.upper_bound(5); // (8, "8")
 
@@ -241,6 +260,10 @@ public:
         }
         if (!mp.count(1)) {
             cout << "contain that element" << endl;
+        }
+        // the wrong way, bc once access mp[13], it inserts item mp[13] = "" into mp
+        if (mp[13] == "") {
+            cout << "not contain that element" << endl;
         }
 
         // map traversal
@@ -357,7 +380,7 @@ public:
         // Descending by default
         // 默认大顶堆；等同于 priority_queue<int, vector<int>, less<int> > a;
         priority_queue<int> a; // descending
-        priority_queue<int, vector<int>, greater<int>> c; // 这样就是小顶堆
+        priority_queue<int, vector<int>, greater<int>> c; // ascending, from small to large
 
         priority_queue<string> b;
 

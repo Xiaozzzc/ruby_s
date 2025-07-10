@@ -15,6 +15,30 @@ using namespace std;
 class Simulate {
 public:
 
+    // 781. Rabbits in Forest
+    // Given answers of rabbits saying how many other rabbits that have the same color as it
+    // e.g.
+    // [1,1,2]
+    // -> 5
+    int numRabbits(vector<int>& answers) {
+        int ans = 0;
+        sort(answers.begin(), answers.end());
+        int n = answers.size();
+        int pre = 0;
+        int tmp = 0;
+        for (int i = 0; i < n; i++) {
+            int cur = answers[i];
+            if (cur == pre && tmp > 0) {
+                tmp--;
+            } else {
+                tmp = cur;
+                ans += cur + 1;
+            }
+            pre = cur;
+        }
+        return ans;
+    }
+
     // 1861. Rotating the Box
     vector<vector<char>> rotateTheBox(vector<vector<char>>& box) {
         vector<vector<char>> grid;

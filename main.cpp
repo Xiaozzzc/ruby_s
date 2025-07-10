@@ -58,10 +58,10 @@ int main() {
     TreeNode* tn1 = new TreeNode(1, tn3, tn4);
 
     vector<vector<int>> matrix = {
-        {3, 2},
-        {4, 3},
-        {4, 4},
-        {2, 5},
+        {1, 2},
+        {2,3},
+        {3,4},
+        {1, 2},
     };
 
     vector<vector<char>> charMatrix = {
@@ -72,7 +72,8 @@ int main() {
 
     vector<string> start = {"ant", "act", "tack"};
     vector<string> target = {"tack", "act", "acti"};
-    vector<int> vec = {1, 2, 3, 5, 5, 5, 8, 9, 10};
+    vector<int> vec = {7,10,16};
+    vector<int> vec1 = {10,14,18};
     string s = "mokkori";
 
 
@@ -85,8 +86,11 @@ int main() {
     int i = 10;
     int j = 9;
     j += i++;
-    // solution.segmentTreeTest();
-    solution.fenwickTreeTest();
 
+    // solution.maxEvents();
+    // solution.removeInvalidParentheses("(a)())()");
+    // solution.convert("PAYPALISHIRING", 4);
+    // solution.countSubarrays(vec, 5);
+    solution.maxFreeTime(21,1,vec, vec1);
     return 0;
 }

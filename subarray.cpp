@@ -17,6 +17,102 @@ using namespace std;
 
 class subarray {
 public:
+    // A subarray is a contiguous sequence of elements within an array.
+
+    // 2537. Count the Number of Good Subarrays
+    // A subarray is good if there are at least k pairs of indices (i, j) such that i < j and arr[i] == arr[j]
+    // sliding window
+    //
+    // nums = [3,1,4,3,2,2,4], k = 2
+    // -> 4
+    // - [3,1,4,3,2,2] that has 2 pairs.
+    // - [3,1,4,3,2,2,4] that has 3 pairs.
+    // - [1,4,3,2,2,4] that has 2 pairs.
+    // - [4,3,2,2,4] that has 2 pairs.
+    //
+    // problem of pairs
+    // [3] 0
+    // [3,3] 0+1 pairs
+    // [3,3,3] 0+1+2 pairs
+    // [3,3,3,3] 0+1+2+3 pairs
+    long long countGood(vector<int>& nums, int k) {
+        unordered_map<int, int> mp;  // mp[u] is the number of times u appears in the window
+        long long ans = 0;
+        int n = nums.size();
+        int left = 0, cnt = 0;
+        for (int right = 0; right < n; right++) {
+            cnt += mp[nums[right]];
+            mp[nums[right]]++;
+            while (cnt >= k) {
+                mp[nums[left]]--;
+                cnt -= mp[nums[left]];
+                left++;
+            }
+            // at this time, [left, i] isn't qualified
+            ans += left;
+        }
+        return ans;
+    }
+
+    // 2302. Count Subarrays With Score Less Than K
+    // A good subarray is (sum of elements) * (num of elements) < k
+    // given a list, return the number of good subarray
+    // sliding window
+    //
+    // nums = [2,1,4,3,5], k = 10
+    // -> 6
+    // [2], [1], [4], [3], [5], [2, 1]
+    long long countSubarrays(vector<int>& nums, long long k) {
+        int n = nums.size();
+        long long ans = 0;
+        int left = 0;
+        long long sum = 0;
+        // right side moving forward, if illegal, left side move forward until reaching right
+        for (int right = 0; right < n; right++) {  // right move forward
+            sum += nums[right];
+            while (sum * (right - left + 1) >= k) {  // if illegal
+                sum -= nums[left];
+                left++;  // left move forward
+            }
+            // now it's all legal
+            // all subarray that ends with right are good ones
+            // [left, right], [left + 1, right], ... , [right - 1, right], [right, right]
+            ans += right - left + 1;
+        }
+        return ans;
+    }
+
+    // 2962. Count Subarrays Where Max Element Appears at Least K Times
+    // sliding windows
+    // nums = [1,3,2,3,3], k = 2
+    // -> 6
+    // [1,3,2,3], [3,2,3], [1,3,2,3,3], [3,2,3,3], [2,3,3], [3,3]
+    // nums = [1,4,2,1], k = 3
+    // -> 0
+    long long countSubarrays(vector<int>& nums, int k) {
+        int n = nums.size();
+        long long ans = 0;
+        int left = 0;
+        int mxNum = 0;
+        int mx = 0;
+        for (int u : nums) {
+            mx = max(u, mx);
+        }
+        for (int right = 0; right < n; right++) {  // sliding windows
+            if (nums[right] == mx) {
+                mxNum++;
+            }
+            while (mxNum == k) {
+                // ans += n - right;
+                if (nums[left++] == mx) {
+                    mxNum--;
+                }
+            }
+            ans += left;
+        }
+        return ans;
+    }
+
     // 763. Partition Labels
     // partition s into as many parts as possible, each letter belongs to only one part
     // return the number of letters in each part
