@@ -55,6 +55,11 @@ public:
 
         int n2 = s.find("lef"); // -1 means not found
 
+        string vowelList = "aeiouAEIOU";
+        if (vowelList.find('d') != -1) {
+            // not found
+        }
+
 
         // Take a substring
         // From index 1 and takes a substring of length 2
@@ -71,7 +76,6 @@ public:
         // reverse
         reverse(s.begin(), s.end());
 
-        // find
         // startWith
         if (s1.find(s2) == 0) {
         }
@@ -106,7 +110,7 @@ public:
     }
 
     /*
-     * vector -> push_back(), find()
+     * vector -> push_back(), there's no find() for vector only std::find()
      * set -> insert(), erase(), find()
      * map -> insert(pair<int, string>()), find()
      * stack -> push(), pop(), top(), empty()
@@ -149,7 +153,7 @@ public:
         right.push_back(10);
         int newRightSize = right.size();
 
-        // 取数组最后的元素
+        // get the last element
         int bk = right.back();
         right.pop_back(); // 弹出数组最后的元素，数组元素 - 1
 
@@ -436,6 +440,30 @@ public:
 
     void maxTest() {
         int a1 = 0, a2 = 2, a3 = 1;
-        int mx = mx({a1, a2, a3});
+        int mx = max({a1, a2, a3});
+    }
+
+    void charTest() {
+        char c = '1';
+        if (isdigit(c)) {
+            printf("is digit");  // is digit
+        }
+        if (isalpha(c)) {
+            printf("is alpha");
+        }
+
+        char c1 = 'f';
+        if (isdigit(c1)) {
+            printf("is digit");
+        }
+        if (isalpha(c1)) {
+            printf("is alpha");  // is alpha
+        }
+        if (isupper(c1)) {
+            printf("is upper");
+        }
+        if (islower(c1)) {
+            printf("is lower");
+        }
     }
 };

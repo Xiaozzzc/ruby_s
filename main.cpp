@@ -32,6 +32,7 @@ int main() {
     learning.setTest();
     learning.stringTest();
     learning.maxTest();
+    learning.charTest();
 
     Solution solution;
 
@@ -92,6 +93,5 @@ int main() {
     // solution.removeInvalidParentheses("(a)())()");
     // solution.convert("PAYPALISHIRING", 4);
     // solution.countSubarrays(vec, 5);
-    solution.maxFreeTime(21,1,vec, vec1);
     return 0;
 }

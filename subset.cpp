@@ -17,24 +17,6 @@ using namespace std;
 
 class subset {
 public:
-    // 594. Longest Harmonious Subsequence
-    int findLHS(vector<int>& nums) {
-        unordered_map<int, int> mp;
-        for (int u : nums) {
-            mp[u]++;
-        }
-        int mx = 0;
-        for (auto& [k, v] : mp) {
-            if (mp.find(k - 1) != mp.end()) {
-                // find a key in map
-                mx = max(mx, mp[k - 1] + v);
-            } else if (mp.count(k + 1)) {
-                // another way
-                mx = max(mx, mp[k + 1] + v);
-            }
-        }
-        return mx;
-    }
 
     // 1498. Number of Subsequences That Satisfy the Given Sum Condition
     // return the number of non-empty sequences which min + max <= target

@@ -18,6 +18,13 @@ using namespace std;
 class subarray {
 public:
     // A subarray is a contiguous sequence of elements within an array.
+    // nums = [1,2,3,4,5,6,7,8]
+    // -> [1,2,3], [3,4,5], [4,5,6,7], [7,8]
+    //
+    // A subsequence is an array that can be derived from another array by deleting some or no elements without changing the order of the remaining elements.
+    // nums = [1,2,3,4,5,6,7,8]
+    // -> [1,3,4], [2,3,7], [5,6,7], [7,8]
+
 
     // 2537. Count the Number of Good Subarrays
     // A subarray is good if there are at least k pairs of indices (i, j) such that i < j and arr[i] == arr[j]
@@ -36,7 +43,7 @@ public:
     // [3,3,3] 0+1+2 pairs
     // [3,3,3,3] 0+1+2+3 pairs
     long long countGood(vector<int>& nums, int k) {
-        unordered_map<int, int> mp;  // mp[u] is the number of times u appears in the window
+        unordered_map<int, int> mp; // mp[u] is the number of times u appears in the window
         long long ans = 0;
         int n = nums.size();
         int left = 0, cnt = 0;
@@ -68,11 +75,13 @@ public:
         int left = 0;
         long long sum = 0;
         // right side moving forward, if illegal, left side move forward until reaching right
-        for (int right = 0; right < n; right++) {  // right move forward
+        for (int right = 0; right < n; right++) {
+            // right move forward
             sum += nums[right];
-            while (sum * (right - left + 1) >= k) {  // if illegal
+            while (sum * (right - left + 1) >= k) {
+                // if illegal
                 sum -= nums[left];
-                left++;  // left move forward
+                left++; // left move forward
             }
             // now it's all legal
             // all subarray that ends with right are good ones
@@ -98,7 +107,8 @@ public:
         for (int u : nums) {
             mx = max(u, mx);
         }
-        for (int right = 0; right < n; right++) {  // sliding windows
+        for (int right = 0; right < n; right++) {
+            // sliding windows
             if (nums[right] == mx) {
                 mxNum++;
             }
@@ -206,5 +216,30 @@ public:
             }
         }
         return -1;
+    }
+
+    // 594. Longest Harmonious Subsequence
+    // Harmonious array as an array where max_value - min_value = 1
+    // Return the length of its longest harmonious subsequence
+    // [1,3,2,2,5,2,3,7]
+    // -> 5, [3,2,2,2,3]
+    int findLHS(vector<int>& nums) {
+        unordered_map<int, int> mp;
+        for (int u : nums) {
+            mp[u]++;
+        }
+        int mx = 0;
+        for (auto& [k, v] : mp) {
+            // iterate map
+            if (mp.find(k - 1) != mp.end()) {
+                // map.find
+                // find a key in map
+                mx = max(mx, mp[k - 1] + v);
+            } else if (mp.count(k + 1)) {
+                // another way
+                mx = max(mx, mp[k + 1] + v);
+            }
+        }
+        return mx;
     }
 };
