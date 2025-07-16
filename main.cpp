@@ -74,8 +74,8 @@ int main() {
 
     vector<string> start = {"ant", "act", "tack"};
     vector<string> target = {"tack", "act", "acti"};
-    vector<int> vec = {7,10,16};
-    vector<int> vec1 = {10,14,18};
+    vector<int> vec = {2,1,3,4};
+    vector<int> vec1 = {1,3,3,2};
     string s = "mokkori";
 
 
@@ -93,5 +93,6 @@ int main() {
     // solution.removeInvalidParentheses("(a)())()");
     // solution.convert("PAYPALISHIRING", 4);
     // solution.countSubarrays(vec, 5);
+    int t = solution.maxExpectedEarnings(3, vec, vec1);
     return 0;
 }
