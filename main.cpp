@@ -31,6 +31,7 @@ int main() {
     learning.mapTest();
     learning.setTest();
     learning.stringTest();
+    learning.maxTest();
 
     Solution solution;
 

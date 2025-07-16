@@ -180,8 +180,8 @@ public:
         // sort Two-dimensional array
         vector<vector<int>> en = {{1, 2}, {4, 1}, {3, 5}, {3, 4}, {3, 7}};
         sort(en.begin(), en.end(), [](auto& a, auto& b) {
-            if (a[0] != b[0]) return a[0] < b[0];  // a[0] from small to large
-            return a[1] > b[1];  // a[1] from large to small
+            if (a[0] != b[0]) return a[0] < b[0]; // a[0] from small to large
+            return a[1] > b[1]; // a[1] from large to small
         });
 
         int n = num.size();
@@ -432,5 +432,10 @@ public:
         // dist.data() 表示 vector<int> dist 的起始位置
         // dist.size() * sizeof(int) 表示字节长度
         memcpy(res.data() + 1, dist.data(), dist.size() * sizeof(int));
+    }
+
+    void maxTest() {
+        int a1 = 0, a2 = 2, a3 = 1;
+        int mx = mx({a1, a2, a3});
     }
 };
